@@ -1,15 +1,16 @@
 sap.ui.define([
     "./BaseController",
-    "sap/ui/demo/basicTemplate/model/formatter"
-], function(BaseController, formatter) {
+    "sap/ui/demo/basicTemplate/model/formatter",
+    'sap/ui/model/json/JSONModel'
+], function(BaseController, formatter, JSONModel) {
     "use strict";
 
     return BaseController.extend("sap.ui.demo.basicTemplate.controller.Master", {
         formatter: formatter,
 
         onInit: function() {
-            // this.oRouter = this.getRouter();
-            // this.oRouter.getRoute('TargetMasterPage').attachMatched(this._handleRouteMatched, this);
+            var oModel = new JSONModel(sap.ui.require.toUrl("sap/ui/demo/mock/products.json"));
+            this.getView().setModel(oModel);
         },
 
         onNavBack: function (oEvent) {

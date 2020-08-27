@@ -1,8 +1,57 @@
 <mvc:View
         controllerName="sap.ui.demo.basicTemplate.controller.Master"
-        xmlns="sap.m"
-        xmlns:mvc="sap.ui.core.mvc">
-    <Page titleAlignment="Center" title="{i18n>systemName}" showNavButton="true"
-          navButtonPress="onNavBack">
-    </Page>
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns="sap.m">
+    <Table id="idProductsTable"
+           mode="MultiSelect"
+           inset="false"
+           showNavButton="true"
+           items="{
+			path: '/ProductCollection',
+			sorter: {
+				path: 'Name'
+			}
+		}">
+        <headerToolbar>
+            <OverflowToolbar>
+                <Button id="table_toolbar0_tableHeaderP13nButton" icon="sap-icon://nav-back" press="onNavBack">
+                    <layoutData>
+                        <OverflowToolbarLayoutData id="table_toolbar0_tableHeaderP13nButton_overflowtoolbarlayoutdata0" priority="NeverOverflow"/>
+                    </layoutData>
+                </Button>
+                <Title text="Projects" level="H2"  hAlign="Center"/>
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column>
+
+                <Text text="Projects" />
+            </Column>
+            <Column
+                    minScreenWidth="Tablet"
+                    demandPopin="true">
+                <Text text="Status" />
+            </Column>
+            <Column
+                    hAlign="Center"
+                    width="10em"
+                    minScreenWidth="Tablet"
+                    demandPopin="true">
+                <Text text="Persons quantity" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem vAlign="Middle" type="Navigation">
+                <cells>
+                    <ObjectIdentifier
+                            title="{Name}"
+                            text="{Description}" />
+                    <ObjectNumber
+                            number="{ProjectStatus}"
+                    />
+                    <Input value="{Quantity}" type="{Text}" description="{UoM}" fieldWidth="{60%}"/>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
 </mvc:View>
