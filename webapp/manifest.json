@@ -78,16 +78,15 @@
 					"target": ["TargetLogin"]
 				},
 				{
-					"pattern": "",
-					"name": "Master",
+					"pattern": "TargetMasterPage/{sName}",
+					"name": "TargetMasterPage",
 					"target": ["TargetMasterPage"]
 				}
 			],
 			"targets": {
 				"TargetLogin": {
 					"viewName": "Login",
-					"viewId": "login",
-					"viewLevel": 1,
+					"viewLevel": 0,
 					"title": "{i18n>title}"
 				},
 				"TargetMasterPage": {

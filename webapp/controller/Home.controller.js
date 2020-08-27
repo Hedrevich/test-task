@@ -1,8 +1,9 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
-],  function (Controller) {
+	"./BaseController",
+	"sap/ui/demo/basicTemplate/model/formatter"
+], function(BaseController, formatter) {
 	"use strict";
-	return Controller.extend("sap.ui.demo.basicTemplate.controller.App", {
+	return BaseController.extend("sap.ui.demo.basicTemplate.controller.App", {
 
 		onLoginTap:function(){
 			var sName = this.getView().byId("loginNameID").getValue();
@@ -10,9 +11,9 @@ sap.ui.define([
 
 
 			// Customer number and customer order identification
-			var router = this.getOwnerComponent().getRouter();
-			if (sName==='' && sPassword==='') {
-				router.navTo('TargetMasterPage', {
+			this.oRouter = this.getRouter();
+			if (sName==='test' && sPassword==='') {
+				this.oRouter.navTo('TargetMasterPage', {
 					sName: sName
 				});
 			} else {
