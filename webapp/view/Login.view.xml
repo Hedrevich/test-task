@@ -1,0 +1,19 @@
+<mvc:View
+		controllerName="sap.ui.demo.basicTemplate.controller.Home"
+		displayBlock="true"
+		xmlns="sap.m"
+		xmlns:mvc="sap.ui.core.mvc">
+
+	<Page title="Authentification">
+		<content>
+
+			<VBox fitContainer="true" justifyContent="Center" alignItems="Center" alignContent="Center">
+				<items>
+					<Input id="loginNameID" placeholder="{i18n>name}"/>
+					<Input id="loginNamePassword" placeholder="{i18n>password}"/>
+					<Button text="{i18n>loginButtonText}" width="12rem" type="Emphasized" press="onLoginTap"/>
+				</items>
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>
