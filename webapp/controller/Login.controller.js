@@ -1,23 +1,24 @@
 sap.ui.define([
 	"./BaseController",
+	"sap/m/MessageBox",
 	"sap/ui/demo/basicTemplate/model/formatter"
-], function(BaseController, formatter) {
+], function(BaseController,MessageBox, formatter) {
 	"use strict";
-	return BaseController.extend("sap.ui.demo.basicTemplate.controller.App", {
+	return BaseController.extend("sap.ui.demo.basicTemplate.controller.Login", {
 
 		onLoginTap:function(){
 			var sName = this.getView().byId("loginNameID").getValue();
-			var sPassword = this.getView().byId("loginNamePassword").getValue();
 
 
 			// Customer number and customer order identification
 			this.oRouter = this.getRouter();
-			if (sName==='test' && sPassword==='') {
+			if (sName) {
 				this.oRouter.navTo('TargetMasterPage', {
 					sName: sName
 				});
+				this.getView().byId("loginNameID").setValue("");
 			} else {
-				alert('Fail to connect wrong customer number or customer order');
+				MessageBox.error(this.getResourceBundle().getText("loginError"));
 			}
 
 		}

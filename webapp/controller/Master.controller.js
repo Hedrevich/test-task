@@ -8,8 +8,13 @@ sap.ui.define([
         formatter: formatter,
 
         onInit: function() {
-            // var router = sap.ui.core.UIComponent.getRouterFor(this);
-            // router.getRoute('TargetMasterPage').attachMatched(this._handleRouteMatched, this);
+            // this.oRouter = this.getRouter();
+            // this.oRouter.getRoute('TargetMasterPage').attachMatched(this._handleRouteMatched, this);
         },
+
+        onNavBack: function (oEvent) {
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("RouteLogin");
+        }
     });
 });

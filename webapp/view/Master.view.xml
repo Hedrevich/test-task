@@ -1,8 +1,8 @@
 <mvc:View
-        displayBlock="true"
+        controllerName="sap.ui.demo.basicTemplate.controller.Master"
         xmlns="sap.m"
         xmlns:mvc="sap.ui.core.mvc">
-    <Shell>
-        <App id="app"/>
-    </Shell>
+    <Page titleAlignment="Center" title="{i18n>systemName}" showNavButton="true"
+          navButtonPress="onNavBack">
+    </Page>
 </mvc:View>
