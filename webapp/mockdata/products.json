@@ -1,44 +1,25 @@
 {
-	"ProductCollection": [
-		{
-			"ProductId": "HT-1258",
-			"Description": "Central Invoice Management",
-			"Category": "Laptops",
-			"MainCategory": "Computer Systems",
-			"TaxTarifCode": "1",
-			"SupplierName": "Very Best Screens",
-			"ProjectStatus": "In progress",
-			"WeightUnit": "KG",
-			"Name": "CIM Project",
-			"DateOfSale": "2017-03-26",
-			"ProductPicUrl": "https://openui5.hana.ondemand.com/test-resources/sap/ui/documentation/sdk/images/HT-1000.jpg",
-			"Status": "Success",
-			"Quantity": 10,
-			"CurrencyCode": "EUR",
-			"Price": 956,
-			"Width": 30,
-			"Depth": 18,
-			"Height": 3,
-			"DimUnit": "cm"
-		},
-		{
-			"ProductId": "HT-1258",
-			"Category": "Smartphones and Tablets",
-			"MainCategory": "Smartphones & Tablets",
-			"TaxTarifCode": "1",
-			"SupplierName": "Ultrasonic United",
-			"ProjectStatus": "Will start soon",
-			"WeightUnit": "KG",
-			"Description": "SAP Cloud Platform  ",
-			"Name": "SCP Project",
-			"ProductPicUrl": "https://openui5.hana.ondemand.com/test-resources/sap/ui/documentation/sdk/images/HT-1258.jpg",
-			"Status": "Success",
-			"Quantity": 24,
-			"CurrencyCode": "EUR",
-			"Price": 529,
-			"Width": 38,
-			"Depth": 21,
-			"Height": 3.5,
-			"DimUnit": "cm"
-		}
-	]}
+  "ProjectCollection": [
+    {
+      "ProjectID": "HT-1258",
+      "ProjectStatus": "In progress",
+      "ProjectDescription": "Central Invoice Management",
+      "ProjectName": "CIM Project",
+      "PersonsQuantity": 8
+    },
+    {
+      "ProjectID": "HT-1258",
+      "ProjectStatus": "Will start soon",
+      "ProjectDescription": "SAP Cloud Platform  ",
+      "ProjectName": "SCP Project",
+      "PersonsQuantity": 24
+    },
+    {
+      "ProjectID": "HT-1257",
+      "ProjectStatus": "Blocked",
+      "ProjectDescription": "ABAP Project",
+      "ProjectName": "SAP ERP ABAP",
+      "PersonsQuantity": 123
+    }
+  ]
+}

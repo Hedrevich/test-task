@@ -2,30 +2,30 @@
         controllerName="sap.ui.demo.basicTemplate.controller.Master"
         xmlns:mvc="sap.ui.core.mvc"
         xmlns="sap.m">
-    <Table id="idProductsTable"
+    <Table id="idProjectsTable"
            mode="MultiSelect"
            inset="false"
-           showNavButton="true"
+           alternateRowColors="true"
+           updateFinished="onUpdateSchedulesFinished"
+           selectionChange="onSelectionChange"
            items="{
-			path: '/ProductCollection',
+			path: '/ProjectCollection',
 			sorter: {
-				path: 'Name'
+				path: 'ProjectName'
 			}
 		}">
         <headerToolbar>
             <OverflowToolbar>
-                <Button id="table_toolbar0_tableHeaderP13nButton" icon="sap-icon://nav-back" press="onNavBack">
-                    <layoutData>
-                        <OverflowToolbarLayoutData id="table_toolbar0_tableHeaderP13nButton_overflowtoolbarlayoutdata0" priority="NeverOverflow"/>
-                    </layoutData>
-                </Button>
-                <Title text="Projects" level="H2"  hAlign="Center"/>
+                <Button id="navBackButton" icon="sap-icon://nav-back" press="onNavBack"/>
+                <Title text="{i18n>projects} ({viewModel>/itemsCount})" level="H2"  hAlign="Center"/>
+                <ToolbarSpacer id="_IDEGen_toolbarspacer0"/>
+                <Button id="deleteProjectButton" text="{i18n>delete}" press="onDeleteProjectButton" enabled="{viewModel>/deleteButtonEnabled}"/>
+                <Button id="addProjectButton" text="{i18n>create}" press="onAddProjectButton"/>
             </OverflowToolbar>
         </headerToolbar>
         <columns>
             <Column>
-
-                <Text text="Projects" />
+                <Text text="{i18n>projects}" />
             </Column>
             <Column
                     minScreenWidth="Tablet"
@@ -37,19 +37,26 @@
                     width="10em"
                     minScreenWidth="Tablet"
                     demandPopin="true">
-                <Text text="Persons quantity" />
+                <Text text="{i18n>persons}" />
             </Column>
         </columns>
         <items>
             <ColumnListItem vAlign="Middle" type="Navigation">
                 <cells>
                     <ObjectIdentifier
-                            title="{Name}"
-                            text="{Description}" />
-                    <ObjectNumber
-                            number="{ProjectStatus}"
+                            title="{ProjectName}"
+                            text="{ProjectDescription}" />
+                    <ObjectStatus
+                            text="{ProjectStatus}"
+                            state="{
+                                    path:'ProjectStatus',
+                                    formatter: '.formatter.statusColorToState'
+                                }"
+
                     />
-                    <Input value="{Quantity}" type="{Text}" description="{UoM}" fieldWidth="{60%}"/>
+                    <ObjectNumber
+                            number="{PersonsQuantity}"
+                    />
                 </cells>
             </ColumnListItem>
         </items>
