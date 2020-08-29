@@ -81,6 +81,11 @@
 					"pattern": "TargetMasterPage/{sName}",
 					"name": "TargetMasterPage",
 					"target": ["TargetMasterPage"]
+				},
+				{
+				"pattern": "TargetDetailsPage/{sProjectId}",
+				"name": "TargetDetailsPage",
+				"target": ["TargetDetailsPage"]
 				}
 			],
 			"targets": {
@@ -92,6 +97,11 @@
 				"TargetMasterPage": {
 					"viewLevel": 1,
 					"viewName": "Master"
+				},
+
+				"TargetDetailsPage": {
+					"viewLevel": 1,
+					"viewName": "ProjectDetails"
 				}
 			}
 		}

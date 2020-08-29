@@ -139,5 +139,14 @@ sap.ui.define([
             });
         },
 
+
+        onProjectItemPress:function (oEvent) {
+            //todo
+            var sProjectID = oEvent.getParameter("listItem").getBindingContext().getPath().split("/").pop();
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("TargetDetailsPage", {
+                sProjectId: sProjectID
+            });
+        }
     });
 });

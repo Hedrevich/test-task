@@ -1,0 +1,36 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:core="sap.ui.core"
+        xmlns:dnd="sap.ui.core.dnd">
+    <Table
+            id="lineMembersList"
+            width="auto"
+            items="{
+						path: 'Members',
+						sorter: {
+							path: 'Name'
+						}
+					}"
+            updateFinished=".onListUpdateFinished"
+            busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+        <columns>
+            <Column>
+                <Text text="{i18n>memberName}"/>
+            </Column>
+        </columns>
+        <dragDropConfig>
+            <dnd:DragInfo
+                    groupName="moveToTable2"
+                    sourceAggregation="items"
+                    dragStart="onDragStart" />
+        </dragDropConfig>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <ObjectIdentifier
+                            text="{Name}"/>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+</core:FragmentDefinition>

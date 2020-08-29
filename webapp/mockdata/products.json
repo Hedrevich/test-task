@@ -5,10 +5,50 @@
       "ProjectStatus": "In progress",
       "ProjectDescription": "Central Invoice Management",
       "ProjectName": "CIM Project",
-      "PersonsQuantity": 8
+      "PersonsQuantity": 8,
+      "Members": [
+        {
+          "MemberID": "1",
+          "Name": "Alex"
+        },
+        {
+          "MemberID": "2",
+          "Name": "Yauhen"
+        },
+        {
+          "MemberID": "3",
+          "Name": "Vasil"
+        }
+      ],
+      "Tasks": [
+        {
+          "TaskID": "1",
+          "Name": "Test",
+          "Description": "Test Descr",
+          "Status": "In progress",
+          "ProjectID": "HT-1258",
+          "MemberID": "1",
+          "Members": [
+            {
+              "MemberID": "1",
+              "Name": "Alex"
+            }
+          ]
+        },
+        {
+          "TaskID": "2",
+          "Name": "Test2",
+          "Description": "Test Descr",
+          "Status": "In progress",
+          "ProjectID": "HT-1258",
+          "MemberID": "1",
+          "Members": [
+          ]
+        }
+      ]
     },
     {
-      "ProjectID": "HT-1258",
+      "ProjectID": "HT-1259",
       "ProjectStatus": "Will start soon",
       "ProjectDescription": "SAP Cloud Platform  ",
       "ProjectName": "SCP Project",
@@ -20,6 +60,23 @@
       "ProjectDescription": "ABAP Project",
       "ProjectName": "SAP ERP ABAP",
       "PersonsQuantity": 123
+    }
+  ],
+
+  "TaskCollection": [
+    {
+      "TaskID": "1",
+      "Name": "Test",
+      "Description": "Test Descr",
+      "Status": "In progress",
+      "ProjectID": "HT-1258",
+      "MemberID": "1"
+    }
+  ],
+  "ProjectMembersCollection": [
+    {
+      "MemberID": "1",
+      "Name": "Alex"
     }
   ]
 }

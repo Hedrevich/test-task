@@ -1,0 +1,54 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:core="sap.ui.core"
+        xmlns:dnd="sap.ui.core.dnd">
+    <Table
+            id="lineItemsList"
+            width="auto"
+            items="{
+						path: 'Tasks',
+						sorter: {
+							path: 'Name'
+						}
+					}"
+            updateFinished=".onListUpdateFinished"
+            busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+        <columns>
+            <Column>
+                <Text text="{i18n>taskName}"/>
+            </Column>
+            <Column
+                    minScreenWidth="Tablet"
+                    demandPopin="true">
+                <Text text="{i18n>taskDescription}"/>
+            </Column>
+            <Column>
+                <Text text="{i18n>taskStatus}"/>
+            </Column>
+            <Column>
+                <Text text="{i18n>Member}"/>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <ObjectIdentifier
+                            text="{Name}"/>
+                    <ObjectIdentifier
+                            text="{Description}"/>
+                    <ObjectIdentifier
+                            text="{Status}"/>
+                    <ObjectIdentifier
+                            text="{Members/0/Name}"/>
+<!--                    </ObjectIdentifier>-->
+                </cells>
+            </ColumnListItem>
+        </items>
+        <dragDropConfig>
+            <dnd:DropInfo
+                    groupName="moveToTable2"
+                    drop="onDropTable2"
+                    targetAggregation="items"/>
+        </dragDropConfig>
+    </Table>
+</core:FragmentDefinition>
