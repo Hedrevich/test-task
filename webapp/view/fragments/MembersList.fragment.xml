@@ -1,7 +1,9 @@
 <core:FragmentDefinition
         xmlns="sap.m"
         xmlns:core="sap.ui.core"
-        xmlns:dnd="sap.ui.core.dnd">
+        xmlns:dnd="sap.ui.core.dnd"
+		xmlns:micro="sap.suite.ui.microchart"
+		xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
     <Table
             id="idLineMembersList"
             width="auto"
@@ -27,6 +29,12 @@
             <Column>
                 <Text text="{i18n>memberName}"/>
             </Column>
+			<Column>
+				<Text text="{i18n>memberAvailability}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>memberWorkload}" />
+			</Column>
         </columns>
         <dragDropConfig>
             <dnd:DragInfo
@@ -35,12 +43,20 @@
                     dragStart="onDragStart" />
         </dragDropConfig>
         <items>
-            <ColumnListItem>
-                <cells>
-                    <ObjectIdentifier
-                            text="{Name}"/>
-                </cells>
-            </ColumnListItem>
+			<ColumnListItem>
+				<cells>
+					<ObjectIdentifier
+						text="{Name}"/>
+					<Text text="{WorkLoad}%" />
+					<FlexBox height="70px" width="70px" renderType="Bare">
+						<layoutData>
+							<FlexItemData maxHeight="70px" />
+						</layoutData>
+						<micro:RadialMicroChart size="Responsive" percentage="{WorkLoad}" app:name="radial" />
+					</FlexBox>
+				</cells>
+			</ColumnListItem>
+
         </items>
     </Table>
 </core:FragmentDefinition>

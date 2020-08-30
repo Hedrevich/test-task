@@ -4,11 +4,11 @@ sap.ui.define([], function () {
 
 		/**
 		 * transform a status code to a valid ui5 ValueState
-		 * @param {string} sColor The color, as a string
+		 * @param {string} the status
 		 * @return {sap.ui.core.ValueState} Success or None
 		 */
-		statusProjectColorToState: function (sColor) {
-			switch (sColor) {
+		statusProjectColorToState: function (sStatus) {
+			switch (sStatus) {
 				case "Blocked":
 					return sap.ui.core.ValueState.Error;
 				case "In progress":
@@ -21,11 +21,11 @@ sap.ui.define([], function () {
 
 		/**
 		 * transform a task status to a valid ui5 ValueState
-		 * @param {string} sColor The color, as a string
+		 * @param {string} sStatus the status
 		 * @return {sap.ui.core.ValueState} Success or None
 		 */
-		statusTaskColorToState: function (sColor) {
-			switch (sColor) {
+		statusTaskColorToState: function (sStatus) {
+			switch (sStatus) {
 				case "Open":
 					return sap.ui.core.ValueState.Warning;
 				case "In progress":
@@ -41,11 +41,11 @@ sap.ui.define([], function () {
 
 		/**
 		 * transform assigned person value to a valid ui5 ValueState
-		 * @param {string} sColor The color, as a string
+		 * @param {string} sStatus the status
 		 * @return {sap.ui.core.ValueState} Success or None
 		 */
-		statusToStateFormatter: function (sColor) {
-			if(!sColor){
+		statusToStateFormatter: function (sStatus) {
+			if(!sStatus){
 				return sap.ui.core.ValueState.Warning;
 			}
 		},

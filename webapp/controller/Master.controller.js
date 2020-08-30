@@ -4,7 +4,7 @@ sap.ui.define([
     'sap/ui/model/json/JSONModel',
     "sap/m/MessageBox",
     "sap/m/MessageToast",
-], function(BaseController, formatter, JSONModel, MessageBox, MessageToast) {
+], function (BaseController, formatter, JSONModel, MessageBox, MessageToast) {
     "use strict";
 
 
@@ -16,9 +16,9 @@ sap.ui.define([
     return BaseController.extend("sap.ui.demo.basicTemplate.controller.Master", {
         formatter: formatter,
 
-        onInit: function() {
+        onInit: function () {
 
-            this.oModel = new JSONModel(sap.ui.require.toUrl("sap/ui/demo/mock/products.json"));
+            this.oModel = new JSONModel(sap.ui.require.toUrl("sap/ui/demo/mock/project.json"));
 
             this.getView().setModel(this.oModel);
 
@@ -31,7 +31,6 @@ sap.ui.define([
 
             this.setModel(this.oViewModel, "viewModel");
         },
-
 
 
         onNavBack: function (oEvent) {
@@ -92,7 +91,6 @@ sap.ui.define([
         },
 
 
-
         onCreateButtonPressed: function (oEvent) {
 
             // validate mandatory inputs
@@ -109,7 +107,7 @@ sap.ui.define([
             };
 
             //set Local data
-            var oLocalData = this.oModel.getData();
+            var oLocalData = this.getCurrentLocalData();
             oLocalData.ProjectCollection.push(oNewObject);
             this.getModel().setData(oLocalData);
 
@@ -132,20 +130,22 @@ sap.ui.define([
                         //todo check for view
                         var aSelectedItems = oProjectTable.getSelectedItems();
 
-                        aSelectedItems.forEach((item) => {oProjectTable.removeItem(item)});
+                        aSelectedItems.forEach((item) => {
+                            oProjectTable.removeItem(item)
+                        });
 
                         var oDeletionMsg = this.getResourceBundle().getText("deletionSucceeded");
-                            MessageToast.show(oDeletionMsg, {
-                                duration: 3000
-                            });
-                            this.oViewModel.setProperty("/deleteButtonEnabled", false);
+                        MessageToast.show(oDeletionMsg, {
+                            duration: 3000
+                        });
+                        this.oViewModel.setProperty("/deleteButtonEnabled", false);
                     }
                 }.bind(this)
             });
         },
 
 
-        onProjectItemPress:function (oEvent) {
+        onProjectItemPress: function (oEvent) {
             //todo
             var sProjectID = oEvent.getParameter("listItem").getBindingContext().getPath().split("/").pop();
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);

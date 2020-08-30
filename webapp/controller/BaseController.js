@@ -2,7 +2,7 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/UIComponent",
     'sap/ui/model/json/JSONModel'
-], function(Controller, UIComponent,JSONModel) {
+], function (Controller, UIComponent, JSONModel) {
     "use strict";
 
     return Controller.extend("sap.ui.demo.basicTemplate.controller.BaseController", {
@@ -60,8 +60,8 @@ sap.ui.define([
 
 
         //todo comments
-        getCurrentLocalData: function (oModel) {
-            return oModel.getData();
+        getCurrentLocalData: function () {
+            return this.oModel.getData();
         },
 
     });

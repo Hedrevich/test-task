@@ -78,7 +78,7 @@
 					"target": ["TargetLogin"]
 				},
 				{
-					"pattern": "TargetMasterPage/{sName}",
+					"pattern": "TargetMasterPage",
 					"name": "TargetMasterPage",
 					"target": ["TargetMasterPage"]
 				},

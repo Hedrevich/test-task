@@ -5,15 +5,18 @@ sap.ui.define([
 ], function(BaseController, formatter,JSONModel) {
 	"use strict";
 
+
+
 	return BaseController.extend("sap.ui.demo.basicTemplate.controller.App", {
 
 		formatter: formatter,
 
 		onInit: function () {
 
-			//TODO move to on init
-			this.oModel = new JSONModel(sap.ui.require.toUrl("sap/ui/demo/mock/products.json"));
 
+
+			//TODO move to on init
+			this.oModel = new JSONModel(sap.ui.require.toUrl("sap/ui/demo/mock/project.json"));
 			// this.getView().setModel(this.oModel, "DetailModel");
 			this.getView().setModel(this.oModel);
 			var oRouter = this.getRouter();
@@ -60,8 +63,7 @@ sap.ui.define([
 			var sTaskId = aPathValues[4];
 
 
-			//todo local data
-			var oLocalData = this.oModel.getData();
+			var oLocalData = this.getCurrentLocalData()
 			oLocalData.ProjectCollection[this.sProjectId].Tasks[sTaskId].Members = [oDraggedRowContext.getObject()];
 
 			//todo
@@ -92,13 +94,12 @@ sap.ui.define([
 		},
 
 
-		//todo check for empty
 		onAddMemberButtonPressed:function (oEvent) {
 
 			var sSelectedMemberKey = this.oViewModel.getProperty("/sNewMemberKey");
 			var oSelectedMemberObject = this.oViewModel.getProperty("/sUnassignedPersons").find(oUnassignedPerson=>oUnassignedPerson.MemberID === sSelectedMemberKey);
 
-			var oLocalData = this.oModel.getData();
+			var oLocalData = this.getCurrentLocalData();
 			oLocalData.ProjectCollection[this.sProjectId].Members.push(oSelectedMemberObject);
 			this.getModel().setData(oLocalData);
 			this.oViewModel.setProperty("/sNewMemberKey","")
@@ -116,18 +117,15 @@ sap.ui.define([
 
 		onDeleteMemberButton:function (oEvent) {
 
-			//todo check for keys
 			var oProjectMemberTable = this.byId("idLineMembersList");
 
-			var sBindingPath = oEvent.oSource.getParent().getBindingContext().getPath();
-			var selectedIndex = sBindingPath.split("/")[2];
-			var oTableData = oProjectMemberTable.getModel().getData();
-			//todo
-			oTableData.ProjectCollection[this.sProjectId].Members.splice(oProjectMemberTable.indexOfItem(oProjectMemberTable.getSelectedItem()), 1);
-			oProjectMemberTable.getModel().setData(oTableData);
+			var sSelectedIndex = oProjectMemberTable.indexOfItem(oProjectMemberTable.getSelectedItem());
+			var oCurrentLocalData = this.getCurrentLocalData();
+			oCurrentLocalData.ProjectCollection[this.sProjectId].Members.splice(sSelectedIndex, 1);
+
+			oProjectMemberTable.getModel().setData(oCurrentLocalData);
 
 
-			this.oViewModel.setProperty("/onDeleteMemberButtonEnabled", false);
 		},
 
 		onEditPress: function () {
@@ -159,7 +157,6 @@ sap.ui.define([
 
 			//todo on oCurrentLocalData.ProjectCollection[this.sProjectId]
 
-
 			oCurrentLocalData.ProjectCollection[this.sProjectId].ProjectStatus = sProjectStatus ? sProjectStatus.Name : "";
 
 			this.getModel().setData(oCurrentLocalData);
@@ -168,16 +165,17 @@ sap.ui.define([
 			this._setEditMode(false);
 		},
 
+        //todo rename model
+		onNavBack: function (oEvent) {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("TargetMasterPage");
+		},
 
-		/**
-		 * Setter for edit mode.
-		 * @param {boolean} isEdit  true if editable, false if uneditable.
-		 * @private
-		 */
+
+        //todo clrt_alt_l
 		_setEditMode: function (isEdit) {
-
-
 			this.oViewModel.setProperty("/isEditMode", isEdit);
 		},
+
 	});
 });

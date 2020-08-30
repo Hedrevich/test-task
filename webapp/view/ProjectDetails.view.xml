@@ -1,111 +1,114 @@
 <mvc:View
-        xmlns="sap.uxap"
-        xmlns:mvc="sap.ui.core.mvc"
-        xmlns:layout="sap.ui.layout"
-        xmlns:m="sap.m"
-        xmlns:core="sap.ui.core"
-        xmlns:f="sap.ui.layout.form"
-        controllerName="sap.ui.demo.basicTemplate.controller.ProjectDetails">
-    <ObjectPageLayout
-            id="ObjectPageLayout"
-            busyIndicatorDelay="0"
-            upperCaseAnchorBar="false"
-            toggleHeaderOnTitleClick="true"
-            showFooter="{viewModel>/isEditMode}">
-        <headerTitle>
-            <ObjectPageHeader id="DetailsHeader" objectTitle="{ProjectName}">
-                <actions>
-                    <ObjectPageHeaderActionButton id="_IDEGen_objectpageheaderactionbutton0" text="{i18n>edit}"
-                                                  hideIcon="true" hideText="false" type="Emphasized"
-                                                  press="onEditPress"/>
-                </actions>
-            </ObjectPageHeader>
-        </headerTitle>
+	xmlns="sap.uxap"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	controllerName="sap.ui.demo.basicTemplate.controller.ProjectDetails">
+	<ObjectPageLayout
+		id="ObjectPageLayout"
+		busyIndicatorDelay="0"
+		upperCaseAnchorBar="false"
+		toggleHeaderOnTitleClick="true"
+		showFooter="{viewModel>/isEditMode}">
+		<headerTitle>
+			<ObjectPageHeader id="DetailsHeader" objectTitle="{ProjectName}">
+				<actions>
+					<ObjectPageHeaderActionButton press="onNavBack"
+												  hideText="false" type="Back"
+					/>
+					<ObjectPageHeaderActionButton text="{i18n>edit}"
+												  hideIcon="true" hideText="false"
+												  press="onEditPress"/>
+				</actions>
+			</ObjectPageHeader>
+		</headerTitle>
 
-        <headerContent>
-            <layout:VerticalLayout id="_IDEGen_verticallayout0">
-                <m:Label id="_IDEGen_label0" text="{i18n>headerProjectDescription}"/>
-                <m:ObjectAttribute id="_IDEGen_objectattribute0" text="{ProjectDescription}"/>
-            </layout:VerticalLayout>
-            <layout:VerticalLayout id="_IDEGen_verticallayout1">
-                <m:Label id="_IDEGen_label1" text="{i18n>headerProjectStatus}"/>
-                <m:ObjectAttribute id="_IDEGen_objectattribute1" text="{ProjectStatus}"/>
-            </layout:VerticalLayout>
-        </headerContent>
-        <sections>
-            <ObjectPageSection id="HeaderSection" title="{i18n>headerGeneralInformation}" titleUppercase="false"
-                               visible="{viewModel>/isEditMode}">
-                <subSections>
-                    <ObjectPageSubSection id="_IDEGen_objectpagesubsection0">
-                        <blocks>
-                            <f:SimpleForm
-                                    editable="true"
-                                    layout="ColumnLayout"
-                                    columnsM="2"
-                                    columnsL="3"
-                                    columnsXL="4">
-                                <f:content>
-                                    <m:Label text="{i18n>taskDescription}">
-                                    </m:Label>
-                                    <m:Input id="headerProjectDescription"
-                                             value="{ProjectDescription}"
-                                             required="{viewModel>/isEditMode}"
-                                             visible="{viewModel>/isEditMode}"
-                                             maxLength="40"/>
-                                    <m:Label text="{i18n>statusName}">
-                                    </m:Label>
-                                    <m:ComboBox placeholder="{i18n>selectAProjectStatus}"
-                                                selectionChange="onRequiredProjectCreationChange"
-                                                maxWidth="100%"
-                                                items="{path:'/ProjectStatusCollection'}"
-                                                selectedKey="{viewModel>/sNewProjectStatusKey}">
-                                        <m:Label text="{i18n>persons}" required="true"/>
-                                        <m:items>
-                                            <core:Item
-                                                    text="{Name}"
-                                                    key="{StatusID}"
-                                                    enabled="true"/>
-                                        </m:items>
-                                    </m:ComboBox>
-                                </f:content>
-                            </f:SimpleForm>
-                        </blocks>
-                    </ObjectPageSubSection>
-                </subSections>
-            </ObjectPageSection>
+		<headerContent>
+			<layout:VerticalLayout id="_IDEGen_verticallayout0">
+				<m:Label id="_IDEGen_label0" text="{i18n>headerProjectDescription}"/>
+				<m:ObjectAttribute id="_IDEGen_objectattribute0" text="{ProjectDescription}"/>
+			</layout:VerticalLayout>
+			<layout:VerticalLayout id="_IDEGen_verticallayout1">
+				<m:Label id="_IDEGen_label1" text="{i18n>headerProjectStatus}"/>
+				<m:ObjectAttribute id="_IDEGen_objectattribute1" text="{ProjectStatus}"/>
+			</layout:VerticalLayout>
+		</headerContent>
+		<sections>
+			<ObjectPageSection id="HeaderSection" title="{i18n>headerGeneralInformation}" titleUppercase="false"
+							   visible="{viewModel>/isEditMode}">
+				<subSections>
+					<ObjectPageSubSection id="_IDEGen_objectpagesubsection0">
+						<blocks>
+							<f:SimpleForm
+								editable="true"
+								layout="ColumnLayout"
+								columnsM="2"
+								columnsL="3"
+								columnsXL="4">
+								<f:content>
+									<m:Label text="{i18n>taskDescription}">
+									</m:Label>
+									<m:Input id="headerProjectDescription"
+											 value="{ProjectDescription}"
+											 required="{viewModel>/isEditMode}"
+											 visible="{viewModel>/isEditMode}"
+											 maxLength="40"/>
+									<m:Label text="{i18n>statusName}">
+									</m:Label>
+									<m:ComboBox placeholder="{i18n>selectAProjectStatus}"
+												selectionChange="onRequiredProjectCreationChange"
+												maxWidth="100%"
+												items="{path:'/ProjectStatusCollection'}"
+												selectedKey="{viewModel>/sNewProjectStatusKey}">
+										<m:Label text="{i18n>persons}" required="true"/>
+										<m:items>
+											<core:Item
+												text="{Name}"
+												key="{StatusID}"
+												enabled="true"/>
+										</m:items>
+									</m:ComboBox>
+								</f:content>
+							</f:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
 
-            <ObjectPageSection title="{i18n>projectMembers}" titleUppercase="false">
-                <subSections>
-                    <ObjectPageSubSection id="_IDEGen_objectpagesubsection1">
-                        <core:Fragment fragmentName="sap.ui.demo.basicTemplate.view.fragments.MembersList"
-                                       type="XML"/>
-                    </ObjectPageSubSection>
-                </subSections>
-            </ObjectPageSection>
+			<ObjectPageSection title="{i18n>projectMembers}" titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection id="_IDEGen_objectpagesubsection1">
+						<core:Fragment fragmentName="sap.ui.demo.basicTemplate.view.fragments.MembersList"
+									   type="XML"/>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
 
-            <ObjectPageSection id="SchedulingParameterSection" title="{i18n>projectTasks}"
-                               titleUppercase="false">
-                <subSections>
-                    <ObjectPageSubSection id="_IDEGen_objectpagesubsection2">
-                        <core:Fragment
-                                fragmentName="sap.ui.demo.basicTemplate.view.fragments.TaskList"
-                                type="XML"/>
-                    </ObjectPageSubSection>
-                </subSections>
-            </ObjectPageSection>
-        </sections>
+			<ObjectPageSection id="SchedulingParameterSection" title="{i18n>projectTasks}"
+							   titleUppercase="false">
+				<subSections>
+					<ObjectPageSubSection id="_IDEGen_objectpagesubsection2">
+						<core:Fragment
+							fragmentName="sap.ui.demo.basicTemplate.view.fragments.TaskList"
+							type="XML"/>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
 
-        <footer>
-            <m:OverflowToolbar>
-                <m:ToolbarSpacer/>
-                <m:Button
-                        id="footerSaveBtn"
-                        type="Emphasized"
-                        text="{i18n>save}"
-                        press="onSaveButtonPress"
-                        visible="{viewModel>/isEditMode}"/>
-                <m:Button id="_IDEGen_button0" text="{i18n>cancel}" press="onCancelPress"/>
-            </m:OverflowToolbar>
-        </footer>
-    </ObjectPageLayout>
+		<footer>
+			<m:OverflowToolbar>
+				<m:ToolbarSpacer/>
+				<m:Button
+					id="footerSaveBtn"
+					type="Emphasized"
+					text="{i18n>save}"
+					press="onSaveButtonPress"
+					visible="{viewModel>/isEditMode}"/>
+				<m:Button id="_IDEGen_button0" text="{i18n>cancel}" press="onCancelPress"/>
+			</m:OverflowToolbar>
+		</footer>
+	</ObjectPageLayout>
 </mvc:View>

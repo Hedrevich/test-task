@@ -9,15 +9,18 @@
       "Members": [
         {
           "MemberID": "1",
-          "Name": "Alex"
+          "Name": "Alex",
+          "WorkLoad": 0
         },
         {
           "MemberID": "2",
-          "Name": "Yauhen"
+          "Name": "Yauhen",
+          "WorkLoad": 50
         },
         {
           "MemberID": "3",
-          "Name": "Vasil"
+          "Name": "Vasil",
+          "WorkLoad": 100
         }
       ],
       "Tasks": [
@@ -96,23 +99,28 @@
   "ProjectMembersCollection": [
     {
       "MemberID": "1",
-      "Name": "Alex"
+      "Name": "Yauhen",
+      "WorkLoad": 30
     },
     {
       "MemberID": "2",
-      "Name": "Yauhen"
+      "Name": "Alex",
+      "WorkLoad": 100
     },
     {
       "MemberID": "3",
-      "Name": "Vasil"
+      "Name": "Vasil",
+      "WorkLoad": 70
     },
     {
       "MemberID": "4",
-      "Name": "Gena"
+      "Name": "Gena",
+      "WorkLoad": 50
     },
     {
       "MemberID": "5",
-      "Name": "Jack"
+      "Name": "Jack",
+      "WorkLoad": 100
     }
   ],
 
