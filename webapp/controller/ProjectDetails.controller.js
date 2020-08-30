@@ -17,7 +17,6 @@ sap.ui.define([
 
 			//TODO move to on init
 			this.oModel = new JSONModel(sap.ui.require.toUrl("sap/ui/demo/mock/project.json"));
-			// this.getView().setModel(this.oModel, "DetailModel");
 			this.getView().setModel(this.oModel);
 			var oRouter = this.getRouter();
 
@@ -51,7 +50,7 @@ sap.ui.define([
 			oDragSession.setComplexData("draggedRowContext", oDraggedRow.getBindingContext());
 		},
 
-		onDropTable2: function(oEvent) {
+		onDropProjectTaskTable: function(oEvent) {
 			var oDragSession = oEvent.getParameter("dragSession");
 			var oDraggedRowContext = oDragSession.getComplexData("draggedRowContext");
 			if (!oDraggedRowContext) {
@@ -66,8 +65,7 @@ sap.ui.define([
 			var oLocalData = this.getCurrentLocalData()
 			oLocalData.ProjectCollection[this.sProjectId].Tasks[sTaskId].Members = [oDraggedRowContext.getObject()];
 
-			//todo
-			this.getModel().setData(oLocalData);
+			this.setLocalData(oLocalData);
 		},
 
 		onAddMemberButton:function (oEvent) {
@@ -77,6 +75,8 @@ sap.ui.define([
 			var aProjectMembers = oEvent.getSource().getBindingContext().getProperty("Members");
 			var aAllMembers = this.getModel().getProperty("/ProjectMembersCollection");
 
+
+			//todo coment
 			var aFreePersons = aAllMembers.filter(function(oMember) {
 				return !aProjectMembers.find(function(assingedMember) {
 					return assingedMember.MemberID === oMember.MemberID
@@ -101,7 +101,7 @@ sap.ui.define([
 
 			var oLocalData = this.getCurrentLocalData();
 			oLocalData.ProjectCollection[this.sProjectId].Members.push(oSelectedMemberObject);
-			this.getModel().setData(oLocalData);
+			this.setLocalData(oLocalData);
 			this.oViewModel.setProperty("/sNewMemberKey","")
 			this.onDialogCancel(oEvent);
 		},
@@ -123,14 +123,13 @@ sap.ui.define([
 			var oCurrentLocalData = this.getCurrentLocalData();
 			oCurrentLocalData.ProjectCollection[this.sProjectId].Members.splice(sSelectedIndex, 1);
 
-			oProjectMemberTable.getModel().setData(oCurrentLocalData);
+			oProjectMemberTable.setLocalData(oCurrentLocalData);
 
 
 		},
 
 		onEditPress: function () {
 
-			//todo in base
 			this.getView().byId("ObjectPageLayout").setSelectedSection(this.getView().byId("HeaderSection"));
 			this._setEditMode(true);
 		},
@@ -159,13 +158,12 @@ sap.ui.define([
 
 			oCurrentLocalData.ProjectCollection[this.sProjectId].ProjectStatus = sProjectStatus ? sProjectStatus.Name : "";
 
-			this.getModel().setData(oCurrentLocalData);
+			this.setLocalData(oCurrentLocalData);
 
 
 			this._setEditMode(false);
 		},
 
-        //todo rename model
 		onNavBack: function (oEvent) {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("TargetMasterPage");

@@ -14,9 +14,7 @@
 							path: 'MemberID'
 						}
 					}"
-            updateFinished=".onListUpdateFinished"
-            selectionChange="onSelectionChange"
-            busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+            selectionChange="onSelectionChange">
         <headerToolbar>
             <OverflowToolbar>
                 <Title text="{i18n>projectMembers}" level="H2"/>

@@ -59,10 +59,22 @@ sap.ui.define([
         },
 
 
-        //todo comments
+        /**
+         * get Current local data
+         * @returns {object}
+         */
         getCurrentLocalData: function () {
             return this.oModel.getData();
         },
+
+        /**
+         * @public
+         * sets data to Local model
+         * @param oLocalData local Data object
+         */
+        setLocalData: function (oLocalData) {
+            this.getModel().setData(oLocalData);
+        }
 
     });
 });

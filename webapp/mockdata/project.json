@@ -99,12 +99,12 @@
   "ProjectMembersCollection": [
     {
       "MemberID": "1",
-      "Name": "Yauhen",
+      "Name": "Alex",
       "WorkLoad": 30
     },
     {
       "MemberID": "2",
-      "Name": "Alex",
+      "Name": "Yauhen",
       "WorkLoad": 100
     },
     {

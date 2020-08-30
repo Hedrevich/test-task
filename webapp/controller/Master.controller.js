@@ -109,7 +109,7 @@ sap.ui.define([
             //set Local data
             var oLocalData = this.getCurrentLocalData();
             oLocalData.ProjectCollection.push(oNewObject);
-            this.getModel().setData(oLocalData);
+            this.setLocalData(oLocalData);
 
             //close Dialog
             this.onDialogCancel(oEvent);
@@ -127,12 +127,19 @@ sap.ui.define([
                 title: this.getResourceBundle().getText("confirmDeletion"),
                 onClose: function (oAction) {
                     if (oAction === MessageBox.Action.OK) {
-                        //todo check for view
+                        //todo coments
                         var aSelectedItems = oProjectTable.getSelectedItems();
 
-                        aSelectedItems.forEach((item) => {
-                            oProjectTable.removeItem(item)
-                        });
+                        aSelectedItems.forEach((item)=>arr.push(oProjectTable.indexOfItem(item)));
+                        var oCurrentLocalData = this.getCurrentLocalData();
+
+
+                        for (var i = aSelectedItems.length -1; i >= 0; i--)
+                            oCurrentLocalData.ProjectCollection.splice(aSelectedItems[i],1);
+
+                        this.setLocalData(oCurrentLocalData);
+
+                        oProjectTable.removeSelections();
 
                         var oDeletionMsg = this.getResourceBundle().getText("deletionSucceeded");
                         MessageToast.show(oDeletionMsg, {

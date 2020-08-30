@@ -11,8 +11,7 @@
 							path: 'Name'
 						}
 					}"
-            updateFinished=".onListUpdateFinished"
-            busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+	>
         <columns>
             <Column>
                 <Text text="{i18n>taskName}"/>
@@ -56,8 +55,32 @@
         <dragDropConfig>
             <dnd:DropInfo
                     groupName="moveToTable2"
-                    drop="onDropTable2"
+                    drop="onDropProjectTaskTable"
                     targetAggregation="items"/>
         </dragDropConfig>
+
     </Table>
+	<Panel
+		class="sapUiContentPadding"
+		headerText="{i18n>ObjectCommentsTabTitle}">
+		<content>
+			<FeedInput post="onPost"/>
+			<List
+				id="idCommentsList"
+				noDataText="{i18n>ObjectCommentNoData}"
+				showSeparators="Inner"
+				items="{
+                     path: 'Name',
+                     sorter: {
+                        path: 'Name',
+                        descending: true
+                     }
+                  }">
+				<FeedListItem
+					info="{Name}"
+					text="{Name}"
+					timestamp="{productFeedback>date}"/>
+			</List>
+		</content>
+	</Panel>
 </core:FragmentDefinition>
