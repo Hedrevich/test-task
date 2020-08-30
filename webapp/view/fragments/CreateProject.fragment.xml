@@ -1,59 +1,57 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core"
-                         xmlns="sap.m"
-                         xmlns:form="sap.ui.layout.form">
-    <Dialog id="createProjectDialog"
-            horizontalScrolling="true"
-            showHeader="true"
-            state="None"
-            stretch="false"
-            title="{i18n>createProject}"
-            type="Standard"
-            verticalScrolling="true"
-    >
-        <content>
-            <form:SimpleForm id="createProject" singleContainerFullSize="true">
-                <form:content>
-                    <Label id="createProjectName" text="{i18n>projectName}" required="true"/>
-                    <Input id="iCreateName"
-                           type="Text"
-                           required="true"
-                           valueStateText="{i18n>mandatoryEntry}"
-                           maxLength="40"
-                           liveChange="onRequiredProjectCreationChange"
-                           change="onInputMandatoryChange"
-                           value="{ProjectForCreation>/name}"/>
-                    <Label id="createProjectDescription" text="{i18n>projectDescription}"/>
-                    <Input id="iCreateDescription"
-                           type="Text"
-                           maxLength="100"
-                           value="{ProjectForCreation>/description}"/>
-                    <Label id="cbCreateProjectStatus" text="{i18n>statusName}" required="true"/>
-                    <ComboBox id="cbCreateStatus"
-                              placeholder="{i18n>selectAProjectStatus}"
-                              valueStateText="{i18n>mandatoryEntry}"
-                              selectionChange="onRequiredProjectCreationChange"
-                              maxWidth="100%"
-                              items="{path:'/ProjectCollection'}"
-                              selectedKey="{ProjectForCreation>/status}">
-                        <Label id="iCreatePersons" text="{i18n>persons}" required="true"/>
-                        <items>
-                            <core:Item id="_IDEGen_item0"
-                                       text="{ProjectStatus}"
-                                       key="{ProjectStatus}"
-                                       enabled="true"/>
-                        </items>
-                    </ComboBox>
-                </form:content>
-            </form:SimpleForm>
-        </content>
-        <beginButton/>
-        <buttons>
-            <Button id="_IDEGen_button0" text="{i18n>create}" iconFirst="true" press="onCreateButtonPressed"
-                    enabled="{ProjectForCreation>/_isValidForCreation}"/>
-            <Button id="_IDEGen_button1" text="{i18n>cancel}" iconFirst="true" press="onDialogCancel"/>
-        </buttons>
-        <customHeader/>
-        <endButton/>
-        <subHeader/>
-    </Dialog>
+						 xmlns="sap.m"
+						 xmlns:form="sap.ui.layout.form">
+	<Dialog horizontalScrolling="true"
+			showHeader="true"
+			state="None"
+			stretch="false"
+			title="{i18n>createProject}"
+			type="Standard"
+			verticalScrolling="true"
+	>
+		<content>
+			<form:SimpleForm singleContainerFullSize="true">
+				<form:content>
+					<Label id="createProjectName" text="{i18n>projectName}" required="true"/>
+					<Input id="iCreateName"
+						   type="Text"
+						   required="true"
+						   valueStateText="{i18n>mandatoryEntry}"
+						   maxLength="40"
+						   liveChange="onRequiredProjectCreationChange"
+						   change="onInputMandatoryChange"
+						   value="{ProjectForCreation>/name}"/>
+					<Label id="createProjectDescription" text="{i18n>projectDescription}"/>
+					<Input id="iCreateDescription"
+						   type="Text"
+						   maxLength="100"
+						   value="{ProjectForCreation>/description}"/>
+					<Label id="cbCreateProjectStatus" text="{i18n>statusName}" required="true"/>
+					<ComboBox id="cbCreateStatus"
+							  placeholder="{i18n>selectAProjectStatus}"
+							  valueStateText="{i18n>mandatoryEntry}"
+							  selectionChange="onRequiredProjectCreationChange"
+							  maxWidth="100%"
+							  items="{path:'/ProjectCollection'}"
+							  selectedKey="{ProjectForCreation>/status}">
+						<Label id="iCreatePersons" text="{i18n>persons}" required="true"/>
+						<items>
+							<core:Item text="{ProjectStatus}"
+									   key="{ProjectStatus}"
+									   enabled="true"/>
+						</items>
+					</ComboBox>
+				</form:content>
+			</form:SimpleForm>
+		</content>
+		<beginButton/>
+		<buttons>
+			<Button text="{i18n>create}" iconFirst="true" press="onCreateButtonPressed"
+					enabled="{ProjectForCreation>/_isValidForCreation}"/>
+			<Button text="{i18n>cancel}" iconFirst="true" press="onDialogCancel"/>
+		</buttons>
+		<customHeader/>
+		<endButton/>
+		<subHeader/>
+	</Dialog>
 </core:FragmentDefinition>

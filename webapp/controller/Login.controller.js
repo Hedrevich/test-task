@@ -1,17 +1,18 @@
 sap.ui.define([
     "./BaseController",
-    "sap/m/MessageBox",
-    "sap/ui/demo/basicTemplate/model/formatter"
-], function (BaseController, MessageBox, formatter) {
+    "sap/m/MessageBox"
+], function (BaseController, MessageBox) {
     "use strict";
-    return BaseController.extend("sap.ui.demo.basicTemplate.controller.Login", {
+    return BaseController.extend("sap.ui.user.management.system.controller.Login", {
 
+
+
+        //on login button click
         onLoginTap: function () {
             var sName = this.getView().byId("loginNameID").getValue();
 
-
-            // Customer number and customer order identification
             this.oRouter = this.getRouter();
+            //name cant be empty
             if (sName) {
                 this.oRouter.navTo('TargetMasterPage');
                 this.getView().byId("loginNameID").setValue("");

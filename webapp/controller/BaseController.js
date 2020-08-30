@@ -5,7 +5,7 @@ sap.ui.define([
 ], function (Controller, UIComponent, JSONModel) {
     "use strict";
 
-    return Controller.extend("sap.ui.demo.basicTemplate.controller.BaseController", {
+    return Controller.extend("sap.ui.user.management.system.controller.BaseController", {
 
 
         /**
@@ -60,7 +60,7 @@ sap.ui.define([
 
 
         /**
-         * get Current local data
+         * Convenience method for getting current local data
          * @returns {object}
          */
         getCurrentLocalData: function () {
@@ -69,12 +69,11 @@ sap.ui.define([
 
         /**
          * @public
-         * sets data to Local model
+         * Convenience method for setting data to local model
          * @param oLocalData local Data object
          */
         setLocalData: function (oLocalData) {
             this.getModel().setData(oLocalData);
         }
-
     });
 });

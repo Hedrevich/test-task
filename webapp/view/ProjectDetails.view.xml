@@ -5,7 +5,7 @@
 	xmlns:m="sap.m"
 	xmlns:core="sap.ui.core"
 	xmlns:f="sap.ui.layout.form"
-	controllerName="sap.ui.demo.basicTemplate.controller.ProjectDetails">
+	controllerName="sap.ui.user.management.system.controller.ProjectDetails">
 	<ObjectPageLayout
 		id="ObjectPageLayout"
 		busyIndicatorDelay="0"
@@ -26,20 +26,20 @@
 		</headerTitle>
 
 		<headerContent>
-			<layout:VerticalLayout id="_IDEGen_verticallayout0">
-				<m:Label id="_IDEGen_label0" text="{i18n>headerProjectDescription}"/>
-				<m:ObjectAttribute id="_IDEGen_objectattribute0" text="{ProjectDescription}"/>
+			<layout:VerticalLayout >
+				<m:Label text="{i18n>headerProjectDescription}"/>
+				<m:ObjectAttribute  text="{ProjectDescription}"/>
 			</layout:VerticalLayout>
-			<layout:VerticalLayout id="_IDEGen_verticallayout1">
-				<m:Label id="_IDEGen_label1" text="{i18n>headerProjectStatus}"/>
-				<m:ObjectAttribute id="_IDEGen_objectattribute1" text="{ProjectStatus}"/>
+			<layout:VerticalLayout >
+				<m:Label  text="{i18n>headerProjectStatus}"/>
+				<m:ObjectAttribute  text="{ProjectStatus}"/>
 			</layout:VerticalLayout>
 		</headerContent>
 		<sections>
 			<ObjectPageSection id="HeaderSection" title="{i18n>headerGeneralInformation}" titleUppercase="false"
 							   visible="{viewModel>/isEditMode}">
 				<subSections>
-					<ObjectPageSubSection id="_IDEGen_objectpagesubsection0">
+					<ObjectPageSubSection >
 						<blocks>
 							<f:SimpleForm
 								editable="true"
@@ -79,8 +79,8 @@
 
 			<ObjectPageSection title="{i18n>projectMembers}" titleUppercase="false">
 				<subSections>
-					<ObjectPageSubSection id="_IDEGen_objectpagesubsection1">
-						<core:Fragment fragmentName="sap.ui.demo.basicTemplate.view.fragments.MembersList"
+					<ObjectPageSubSection >
+						<core:Fragment fragmentName="sap.ui.user.management.system.view.fragments.MembersList"
 									   type="XML"/>
 					</ObjectPageSubSection>
 				</subSections>
@@ -89,15 +89,15 @@
 			<ObjectPageSection id="SchedulingParameterSection" title="{i18n>projectTasks}"
 							   titleUppercase="false">
 				<subSections>
-					<ObjectPageSubSection id="_IDEGen_objectpagesubsection2">
+					<ObjectPageSubSection>
 						<core:Fragment
-							fragmentName="sap.ui.demo.basicTemplate.view.fragments.TaskList"
+							fragmentName="sap.ui.user.management.system.view.fragments.TaskList"
 							type="XML"/>
 					</ObjectPageSubSection>
 				</subSections>
 			</ObjectPageSection>
-		</sections>
 
+		</sections>
 		<footer>
 			<m:OverflowToolbar>
 				<m:ToolbarSpacer/>
@@ -107,7 +107,7 @@
 					text="{i18n>save}"
 					press="onSaveButtonPress"
 					visible="{viewModel>/isEditMode}"/>
-				<m:Button id="_IDEGen_button0" text="{i18n>cancel}" press="onCancelPress"/>
+				<m:Button text="{i18n>cancel}" press="onCancelPress"/>
 			</m:OverflowToolbar>
 		</footer>
 	</ObjectPageLayout>

@@ -1,86 +1,63 @@
 <core:FragmentDefinition
-        xmlns="sap.m"
-        xmlns:core="sap.ui.core"
-        xmlns:dnd="sap.ui.core.dnd">
-    <Table
-            id="lineItemsList"
-            width="auto"
-            items="{
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:dnd="sap.ui.core.dnd">
+	<Table
+		id="lineItemsList"
+		width="auto"
+		items="{
 						path: 'Tasks',
 						sorter: {
 							path: 'Name'
 						}
 					}"
 	>
-        <columns>
-            <Column>
-                <Text text="{i18n>taskName}"/>
-            </Column>
-            <Column
-                    minScreenWidth="Tablet"
-                    demandPopin="true">
-                <Text text="{i18n>taskDescription}"/>
-            </Column>
-            <Column>
-                <Text text="{i18n>taskStatus}"/>
-            </Column>
-            <Column>
-                <Text text="{i18n>Member}"/>
-            </Column>
-        </columns>
-        <items>
-            <ColumnListItem>
-                <cells>
-                    <ObjectIdentifier
-                            text="{Name}"/>
-                    <ObjectIdentifier
-                            text="{Description}"/>
-                    <ObjectStatus
-                            text="{Status}"
-                            state="{
+		<columns>
+			<Column>
+				<Text text="{i18n>taskName}"/>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="{i18n>taskDescription}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>taskStatus}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>Member}"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<ObjectIdentifier
+						text="{Name}"/>
+					<ObjectIdentifier
+						text="{Description}"/>
+					<ObjectStatus
+						text="{Status}"
+						state="{
                                     path:'Status',
                                     formatter: '.formatter.statusTaskColorToState'
                                 }"/>
 
-                    <ObjectStatus
-                            text="{= ${Members/0/Name} ? ${Members/0/Name} : ${i18n>unassigned} }"
-                            state="{
+					<ObjectStatus
+						text="{= ${Members/0/Name} ? ${Members/0/Name} : ${i18n>unassigned} }"
+						state="{
                                     path:'Members/0/Name',
                                     formatter: '.formatter.statusToStateFormatter'
                                 }"
-                           />
-                </cells>
-            </ColumnListItem>
-        </items>
-        <dragDropConfig>
-            <dnd:DropInfo
-                    groupName="moveToTable2"
-                    drop="onDropProjectTaskTable"
-                    targetAggregation="items"/>
-        </dragDropConfig>
+					/>
+				</cells>
+			</ColumnListItem>
+		</items>
+		<dragDropConfig>
+			<dnd:DropInfo
+				groupName="moveToTable2"
+				drop="onDropProjectTaskTable"
+				targetAggregation="items"/>
+		</dragDropConfig>
 
-    </Table>
-	<Panel
-		class="sapUiContentPadding"
-		headerText="{i18n>ObjectCommentsTabTitle}">
-		<content>
-			<FeedInput post="onPost"/>
-			<List
-				id="idCommentsList"
-				noDataText="{i18n>ObjectCommentNoData}"
-				showSeparators="Inner"
-				items="{
-                     path: 'Name',
-                     sorter: {
-                        path: 'Name',
-                        descending: true
-                     }
-                  }">
-				<FeedListItem
-					info="{Name}"
-					text="{Name}"
-					timestamp="{productFeedback>date}"/>
-			</List>
-		</content>
-	</Panel>
+	</Table>
 </core:FragmentDefinition>

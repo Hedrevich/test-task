@@ -1,65 +1,66 @@
 <mvc:View
-        controllerName="sap.ui.demo.basicTemplate.controller.Master"
-        xmlns:mvc="sap.ui.core.mvc"
-        xmlns="sap.m">
-    <Table id="idProjectsTable"
-           mode="MultiSelect"
-           inset="false"
-           alternateRowColors="true"
-           updateFinished="onUpdateSchedulesFinished"
-           selectionChange="onSelectionChange"
-           itemPress="onProjectItemPress"
-           items="{
+	controllerName="sap.ui.user.management.system.controller.Master"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<Table id="idProjectsTable"
+		   mode="MultiSelect"
+		   inset="false"
+		   alternateRowColors="true"
+		   updateFinished="onUpdateSchedulesFinished"
+		   selectionChange="onSelectionChange"
+		   itemPress="onProjectItemPress"
+		   items="{
 			path: '/ProjectCollection',
 			sorter: {
-				path: 'ProjectName'
+				path: 'ProjectID'
 			}
 		}">
-        <headerToolbar>
-            <OverflowToolbar>
-                <Button id="navBackButton" icon="sap-icon://nav-back" press="onNavBack"/>
-                <Title text="{i18n>projects} ({viewModel>/itemsCount})" level="H2"  hAlign="Center"/>
-                <ToolbarSpacer/>
-                <Button id="deleteProjectButton" text="{i18n>delete}" press="onDeleteProjectButton" enabled="{viewModel>/deleteButtonEnabled}"/>
-                <Button id="addProjectButton" text="{i18n>create}" press="onAddProjectButton"/>
-            </OverflowToolbar>
-        </headerToolbar>
-        <columns>
-            <Column>
-                <Text text="{i18n>projects}" />
-            </Column>
-            <Column
-                    minScreenWidth="Tablet"
-                    demandPopin="true">
-                <Text text="Status" />
-            </Column>
-            <Column
-                    hAlign="Center"
-                    width="10em"
-                    minScreenWidth="Tablet"
-                    demandPopin="true">
-                <Text text="{i18n>persons}" />
-            </Column>
-        </columns>
-        <items>
-            <ColumnListItem vAlign="Middle" type="Navigation">
-                <cells>
-                    <ObjectIdentifier
-                            title="{ProjectName}"
-                            text="{ProjectDescription}" />
-                    <ObjectStatus
-                            text="{ProjectStatus}"
-                            state="{
+		<headerToolbar>
+			<OverflowToolbar>
+				<Button id="navBackButton" icon="sap-icon://nav-back" press="onNavBack"/>
+				<Title text="{i18n>projects} ({viewModel>/itemsCount})" level="H2" hAlign="Center"/>
+				<ToolbarSpacer/>
+				<Button id="deleteProjectButton" text="{i18n>delete}" press="onDeleteProjectButton"
+						enabled="{viewModel>/deleteButtonEnabled}"/>
+				<Button id="addProjectButton" text="{i18n>create}" press="onAddProjectButton"/>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<Text text="{i18n>projects}"/>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="Status"/>
+			</Column>
+			<Column
+				hAlign="Center"
+				width="10em"
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="{i18n>persons}"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle" type="Navigation">
+				<cells>
+					<ObjectIdentifier
+						title="{ProjectName}"
+						text="{ProjectDescription}"/>
+					<ObjectStatus
+						text="{ProjectStatus}"
+						state="{
                                     path:'ProjectStatus',
                                     formatter: '.formatter.statusProjectColorToState'
                                 }"
 
-                    />
-                    <ObjectNumber
-                            number="{PersonsQuantity}"
-                    />
-                </cells>
-            </ColumnListItem>
-        </items>
-    </Table>
+					/>
+					<ObjectNumber
+						number="{PersonsQuantity}"
+					/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
 </mvc:View>

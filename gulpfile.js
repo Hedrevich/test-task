@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var ui5preload = require('gulp-ui5-preload');
-var uglify = require('gulp-uglify');
+var uglify = require('gulp-uglify-es').default;
 var prettydata = require('gulp-pretty-data');
 var gulpif = require('gulp-if');
 gulp.task(

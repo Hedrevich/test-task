@@ -1,24 +1,26 @@
 sap.ui.define([
     "./BaseController",
-    "sap/ui/demo/basicTemplate/model/formatter",
+    "sap/ui/user/management/system/model/formatter",
     'sap/ui/model/json/JSONModel',
     "sap/m/MessageBox",
     "sap/m/MessageToast",
 ], function (BaseController, formatter, JSONModel, MessageBox, MessageToast) {
     "use strict";
 
-
+    //local model for project creation validation
     var oInitialCreationModelProperties = {
         _isValidForCreation: false
     };
 
+    var LOCAL_MODEL_PATH = "sap/ui/user/mock/project.json";
 
-    return BaseController.extend("sap.ui.demo.basicTemplate.controller.Master", {
+    return BaseController.extend("sap.ui.user.management.system.controller.Master", {
         formatter: formatter,
 
         onInit: function () {
 
-            this.oModel = new JSONModel(sap.ui.require.toUrl("sap/ui/demo/mock/project.json"));
+            //use mock data
+            this.oModel = new JSONModel(sap.ui.require.toUrl(LOCAL_MODEL_PATH));
 
             this.getView().setModel(this.oModel);
 
@@ -27,34 +29,28 @@ sap.ui.define([
                 deleteButtonEnabled: false
             });
 
+            //set up inital view state
             this.oCreationModel = new JSONModel(Object.assign({}, oInitialCreationModelProperties));
 
             this.setModel(this.oViewModel, "viewModel");
         },
 
 
-        onNavBack: function (oEvent) {
+        onNavBack: function () {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("RouteLogin");
         },
 
-        /**
-         * Triggered by the table's 'updateFinished' event
-         * @param {sap.ui.base.Event} oEvent the update finished event
-         */
+
         onUpdateSchedulesFinished: function (oEvent) {
             this.oViewModel.setProperty("/itemsCount", oEvent.getParameter("total"));
         },
 
 
-        /**
-         * called when a user wants to create a new connected system
-         */
-        onAddProjectButton: function () {
 
-            //todo to base controller
+        onAddProjectButton: function () {
             if (!this.oCreateDialog) {
-                this.oCreateDialog = sap.ui.xmlfragment(this.getView().getId(), "sap.ui.demo.basicTemplate.view.fragments.CreateProject", this);
+                this.oCreateDialog = sap.ui.xmlfragment(this.getView().getId(), "sap.ui.user.management.system.view.fragments.CreateProject", this);
                 this.oCreateDialog.setModel(this.oCreationModel, "ProjectForCreation");
                 this.getView().addDependent(this.oCreateDialog);
                 this.oCreationNameInput = this.byId("iCreateName");
@@ -70,22 +66,20 @@ sap.ui.define([
          */
         onDialogCancel: function (oEvent) {
             var oCreationDialog = oEvent.getSource().getParent();
+            //set up initial view state
             this.oCreationModel.setData(Object.assign({}, oInitialCreationModelProperties));
             oCreationDialog.close();
         },
 
 
-        /**
-         * Fired when the value of the connected system code or destination is changed by user interaction
-         * @param {object} oEvent the change parameter
-         */
+
         onRequiredProjectCreationChange: function (oEvent) {
+            //inputs validation
             var bCanCreateProject = this.oCreationNameInput.getValue().trim().length > 0 && this.oCreationStatusCombo.getValue().trim().length > 0;
             this.oCreationModel.setProperty("/_isValidForCreation", bCanCreateProject);
         },
 
 
-        //todo base
         onSelectionChange: function (oEvent) {
             this.oViewModel.setProperty("/deleteButtonEnabled", oEvent.getParameter("selected"));
         },
@@ -99,11 +93,15 @@ sap.ui.define([
             var sProjectStatusDescription = this.oCreationModel.getProperty("/description")
                 && this.oCreationModel.getProperty("/description").trim();
 
+            //generate id( special case for our mock)
+            var sProjectId = this.getCurrentLocalData().ProjectCollection.length+1;
+
             // all looks good, trying to create new project
             var oNewObject = {
                 ProjectName: sProjectName,
                 ProjectStatus: sProjectStatus,
-                ProjectDescription: sProjectStatusDescription
+                ProjectDescription: sProjectStatusDescription,
+                ProjectID: sProjectId
             };
 
             //set Local data
@@ -120,6 +118,7 @@ sap.ui.define([
 
         onDeleteProjectButton: function(oEvent) {
 
+            //confirmation message
             var oProjectTable = this.byId("idProjectsTable");
             var oConfirmationMsg = this.getResourceBundle().getText("projectDeletionConfirmation");
 
@@ -127,20 +126,34 @@ sap.ui.define([
                 title: this.getResourceBundle().getText("confirmDeletion"),
                 onClose: function (oAction) {
                     if (oAction === MessageBox.Action.OK) {
-                        //todo coments
+
                         var aSelectedItems = oProjectTable.getSelectedItems();
 
-                        aSelectedItems.forEach((item)=>arr.push(oProjectTable.indexOfItem(item)));
+                        //get current local data
                         var oCurrentLocalData = this.getCurrentLocalData();
 
+                        //get inde seleted items(may be can simplifed)
+                        var aIndexArray = [];
 
-                        for (var i = aSelectedItems.length -1; i >= 0; i--)
-                            oCurrentLocalData.ProjectCollection.splice(aSelectedItems[i],1);
+                        aSelectedItems.forEach((item,index)=>
+                            {
 
+                                aIndexArray.push(oProjectTable.indexOfItem(aSelectedItems[index]));
+                            }
+                        );
+                        //sort
+                        oCurrentLocalData.ProjectCollection.sort((a, b) => (a.ProjectID > b.ProjectID) ? 1 : -1);
+
+                        //multiply remove
+                        for (var i = aIndexArray.length -1; i >= 0; i--)
+                            oCurrentLocalData.ProjectCollection.splice(aIndexArray[i],1);
+
+                        //set to local data
                         this.setLocalData(oCurrentLocalData);
 
                         oProjectTable.removeSelections();
 
+                        //rise message toast
                         var oDeletionMsg = this.getResourceBundle().getText("deletionSucceeded");
                         MessageToast.show(oDeletionMsg, {
                             duration: 3000
@@ -152,8 +165,8 @@ sap.ui.define([
         },
 
 
+        //navigation to detail page
         onProjectItemPress: function (oEvent) {
-            //todo
             var sProjectID = oEvent.getParameter("listItem").getBindingContext().getPath().split("/").pop();
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("TargetDetailsPage", {

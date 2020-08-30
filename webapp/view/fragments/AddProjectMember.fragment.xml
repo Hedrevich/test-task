@@ -1,43 +1,41 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core"
-                         xmlns="sap.m"
-                         xmlns:form="sap.ui.layout.form">
-    <Dialog id="addProjectMember"
-            horizontalScrolling="true"
-            showHeader="true"
-            state="None"
-            stretch="false"
-            title="{i18n>createProject}"
-            type="Standard"
-            verticalScrolling="true"
-    >
-        <content>
-            <form:SimpleForm singleContainerFullSize="true">
-                <form:content>
-                    <Label text="{i18n>memberName}" required="true"/>
-                    <ComboBox id="cbCreateProjectMember"
-                              placeholder="{i18n>selectAProjectMember}"
-                              maxWidth="100%"
-                              items="{path:'viewModel>/sUnassignedPersons'}"
-                              selectedKey="{viewModel>/sNewMemberKey}">
-                        <Label text="{i18n>selectAProjectMember}" required="true"/>
-                        <items>
-                            <core:Item id="_IDEGen_item0"
-                                       text="{viewModel>Name}"
-                                       key="{viewModel>MemberID}"
-                                       enabled="true"/>
-                        </items>
-                    </ComboBox>
-                </form:content>
-            </form:SimpleForm>
-        </content>
-        <beginButton/>
-        <buttons>
-            <Button text="{i18n>create}" iconFirst="true" press="onAddMemberButtonPressed"
-                   />
-            <Button id="__cancelProjectMember_button0_button1" text="{i18n>cancel}" iconFirst="true" press="onDialogCancel"/>
-        </buttons>
-        <customHeader/>
-        <endButton/>
-        <subHeader/>
-    </Dialog>
+						 xmlns="sap.m"
+						 xmlns:form="sap.ui.layout.form">
+	<Dialog horizontalScrolling="true"
+			showHeader="true"
+			state="None"
+			stretch="false"
+			title="{i18n>createProject}"
+			type="Standard"
+			verticalScrolling="true"
+	>
+		<content>
+			<form:SimpleForm singleContainerFullSize="true">
+				<form:content>
+					<Label text="{i18n>memberName}" required="true"/>
+					<ComboBox placeholder="{i18n>selectAProjectMember}"
+							  maxWidth="100%"
+							  items="{path:'viewModel>/sUnassignedPersons'}"
+							  selectedKey="{viewModel>/sNewMemberKey}">
+						<Label text="{i18n>selectAProjectMember}" required="true"/>
+						<items>
+							<core:Item text="{viewModel>Name}"
+									   key="{viewModel>MemberID}"
+									   enabled="true"/>
+						</items>
+					</ComboBox>
+				</form:content>
+			</form:SimpleForm>
+		</content>
+		<beginButton/>
+		<buttons>
+			<Button text="{i18n>create}" iconFirst="true" press="onAddMemberButtonPressed"
+			/>
+			<Button text="{i18n>cancel}" iconFirst="true"
+					press="onDialogCancel"/>
+		</buttons>
+		<customHeader/>
+		<endButton/>
+		<subHeader/>
+	</Dialog>
 </core:FragmentDefinition>
