@@ -23,8 +23,8 @@
       "Tasks": [
         {
           "TaskID": "1",
-          "Name": "Test",
-          "Description": "Test Descr",
+          "Name": "Task 1",
+          "Description": "Description 1",
           "Status": "In progress",
           "ProjectID": "HT-1258",
           "MemberID": "1",
@@ -37,9 +37,29 @@
         },
         {
           "TaskID": "2",
-          "Name": "Test2",
-          "Description": "Test Descr",
-          "Status": "In progress",
+          "Name": "Task 2",
+          "Description": "Description 2",
+          "Status": "Open",
+          "ProjectID": "HT-1258",
+          "MemberID": "1",
+          "Members": [
+          ]
+        },
+        {
+          "TaskID": "3",
+          "Name": "Task 3",
+          "Description": "Description 3",
+          "Status": "Done",
+          "ProjectID": "HT-1258",
+          "MemberID": "1",
+          "Members": [
+          ]
+        },
+        {
+          "TaskID": "4",
+          "Name": "Task 4",
+          "Description": "Description 4",
+          "Status": "Cancelled",
           "ProjectID": "HT-1258",
           "MemberID": "1",
           "Members": [
@@ -77,6 +97,38 @@
     {
       "MemberID": "1",
       "Name": "Alex"
+    },
+    {
+      "MemberID": "2",
+      "Name": "Yauhen"
+    },
+    {
+      "MemberID": "3",
+      "Name": "Vasil"
+    },
+    {
+      "MemberID": "4",
+      "Name": "Gena"
+    },
+    {
+      "MemberID": "5",
+      "Name": "Jack"
+    }
+  ],
+
+
+  "ProjectStatusCollection": [
+    {
+      "StatusID": "1",
+      "Name": "Will start soon"
+    },
+    {
+      "StatusID": "2",
+      "Name": "In progress"
+    },
+    {
+      "StatusID": "3",
+      "Name": "Blocked"
     }
   ]
 }

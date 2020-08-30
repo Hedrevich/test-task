@@ -32,7 +32,6 @@
                               placeholder="{i18n>selectAProjectStatus}"
                               valueStateText="{i18n>mandatoryEntry}"
                               selectionChange="onRequiredProjectCreationChange"
-                              change="onComboMandatoryChange"
                               maxWidth="100%"
                               items="{path:'/ProjectCollection'}"
                               selectedKey="{ProjectForCreation>/status}">

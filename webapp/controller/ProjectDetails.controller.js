@@ -19,13 +19,24 @@ sap.ui.define([
 			var oRouter = this.getRouter();
 
 			oRouter.getRoute("TargetDetailsPage").attachMatched(this._onRouteMatched, this);
+
+
+			this.oViewModel = this.createJSONModel({
+				isEditMode:false,
+				sUnassignedPersons: [],
+				sNewMemberKey:"",
+				sNewProjectStatusKey:"",
+				onDeleteMemberButtonEnabled:false
+			});
+
+			this.setModel(this.oViewModel, "viewModel");
 		},
 
 		_onRouteMatched : function (oEvent) {
 
-			var oArgs = oEvent.getParameter("arguments");
+			this.sProjectId = oEvent.getParameter("arguments").sProjectId;
 			this.getView().bindElement({
-				path : "/ProjectCollection/" + oArgs.sProjectId
+				path : "/ProjectCollection/" + this.sProjectId
 			});
 		},
 
@@ -45,11 +56,128 @@ sap.ui.define([
 			}
 			var oDroppedRow = oEvent.getParameter("droppedControl");
 			var aPathValues = oDroppedRow.getBindingContext().getPath().split("/");
-			var sProjectId = aPathValues[2];
+
 			var sTaskId = aPathValues[4];
+
+
+			//todo local data
 			var oLocalData = this.oModel.getData();
-			oLocalData.ProjectCollection[sProjectId].Tasks[sTaskId].Members = [oDraggedRowContext.getObject()];
+			oLocalData.ProjectCollection[this.sProjectId].Tasks[sTaskId].Members = [oDraggedRowContext.getObject()];
+
+			//todo
 			this.getModel().setData(oLocalData);
+		},
+
+		onAddMemberButton:function (oEvent) {
+
+			//todo check for base controller
+
+			var aProjectMembers = oEvent.getSource().getBindingContext().getProperty("Members");
+			var aAllMembers = this.getModel().getProperty("/ProjectMembersCollection");
+
+			var aFreePersons = aAllMembers.filter(function(oMember) {
+				return !aProjectMembers.find(function(assingedMember) {
+					return assingedMember.MemberID === oMember.MemberID
+				})
+			});
+
+			this.oViewModel.setProperty("/sUnassignedPersons", aFreePersons);
+
+			if (!this.oCreateDialog) {
+				this.oCreateDialog = sap.ui.xmlfragment(this.getView().getId(), "sap.ui.demo.basicTemplate.view.fragments.AddProjectMember", this);
+				this.oCreateDialog.setModel(this.oViewModel, "MemberForCreation");
+				this.getView().addDependent(this.oCreateDialog);
+			}
+			this.oCreateDialog.open();
+		},
+
+
+		//todo check for empty
+		onAddMemberButtonPressed:function (oEvent) {
+
+			var sSelectedMemberKey = this.oViewModel.getProperty("/sNewMemberKey");
+			var oSelectedMemberObject = this.oViewModel.getProperty("/sUnassignedPersons").find(oUnassignedPerson=>oUnassignedPerson.MemberID === sSelectedMemberKey);
+
+			var oLocalData = this.oModel.getData();
+			oLocalData.ProjectCollection[this.sProjectId].Members.push(oSelectedMemberObject);
+			this.getModel().setData(oLocalData);
+			this.oViewModel.setProperty("/sNewMemberKey","")
+			this.onDialogCancel(oEvent);
+		},
+
+		onDialogCancel: function (oEvent) {
+			var oCreationDialog = oEvent.getSource().getParent();
+			oCreationDialog.close();
+		},
+
+		onSelectionChange: function (oEvent) {
+			this.oViewModel.setProperty("/onDeleteMemberButtonEnabled", oEvent.getParameter("selected"));
+		},
+
+		onDeleteMemberButton:function (oEvent) {
+
+			//todo check for keys
+			var oProjectMemberTable = this.byId("idLineMembersList");
+
+			var sBindingPath = oEvent.oSource.getParent().getBindingContext().getPath();
+			var selectedIndex = sBindingPath.split("/")[2];
+			var oTableData = oProjectMemberTable.getModel().getData();
+			//todo
+			oTableData.ProjectCollection[this.sProjectId].Members.splice(oProjectMemberTable.indexOfItem(oProjectMemberTable.getSelectedItem()), 1);
+			oProjectMemberTable.getModel().setData(oTableData);
+
+
+			this.oViewModel.setProperty("/onDeleteMemberButtonEnabled", false);
+		},
+
+		onEditPress: function () {
+
+			//todo in base
+			this.getView().byId("ObjectPageLayout").setSelectedSection(this.getView().byId("HeaderSection"));
+			this._setEditMode(true);
+		},
+
+
+
+		onCancelPress: function () {
+			this._setEditMode(false);
+		},
+
+
+		//save on footer
+		onSaveButtonPress: function (oEvent) {
+
+
+			var aAllProjectStatuses = this.getModel().getProperty("/ProjectStatusCollection");
+			var sProjectStatusKey = this.oViewModel.getProperty("/sNewProjectStatusKey");
+
+			var sProjectStatus = aAllProjectStatuses.find(function(oProjectStatus) {
+				return (oProjectStatus.StatusID === sProjectStatusKey) || ""
+			});
+
+			var oCurrentLocalData = this.getCurrentLocalData(this.oModel)
+
+			//todo on oCurrentLocalData.ProjectCollection[this.sProjectId]
+
+
+			oCurrentLocalData.ProjectCollection[this.sProjectId].ProjectStatus = sProjectStatus ? sProjectStatus.Name : "";
+
+			this.getModel().setData(oCurrentLocalData);
+
+
+			this._setEditMode(false);
+		},
+
+
+		/**
+		 * Setter for edit mode.
+		 * @param {boolean} isEdit  true if editable, false if uneditable.
+		 * @private
+		 */
+		_setEditMode: function (isEdit) {
+
+
+			this.oViewModel.setProperty("/isEditMode", isEdit);
 		},
 	});
 });

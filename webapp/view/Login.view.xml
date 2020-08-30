@@ -9,7 +9,7 @@
 
 			<VBox fitContainer="true" justifyContent="Center" alignItems="Center" alignContent="Center">
 				<items>
-					<Input id="loginNameID" placeholder="{i18n>name}"/>
+					<Input id="loginNameID" placeholder="{i18n>login}"/>
 					<Input id="loginNamePassword" placeholder="{i18n>password}"/>
 					<Button text="{i18n>loginButtonText}" width="12rem" type="Emphasized" press="onLoginTap"/>
 				</items>

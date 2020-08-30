@@ -3,16 +3,26 @@
         xmlns:core="sap.ui.core"
         xmlns:dnd="sap.ui.core.dnd">
     <Table
-            id="lineMembersList"
+            id="idLineMembersList"
             width="auto"
+            mode="SingleSelect"
             items="{
 						path: 'Members',
 						sorter: {
-							path: 'Name'
+							path: 'MemberID'
 						}
 					}"
             updateFinished=".onListUpdateFinished"
+            selectionChange="onSelectionChange"
             busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+        <headerToolbar>
+            <OverflowToolbar>
+                <Title text="{i18n>projectMembers}" level="H2"/>
+                <ToolbarSpacer/>
+                <Button text="{i18n>addMember}" press="onAddMemberButton"/>
+                <Button text="{i18n>deleteMember}" enabled="{viewModel>/onDeleteMemberButtonEnabled}" press="onDeleteMemberButton"/>
+            </OverflowToolbar>
+        </headerToolbar>
         <columns>
             <Column>
                 <Text text="{i18n>memberName}"/>

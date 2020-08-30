@@ -1,33 +1,3 @@
-<!--<mvc:View-->
-<!--        controllerName="sap.ui.demo.basicTemplate.controller.ProjectDetails"-->
-<!--        xmlns="sap.m"-->
-<!--        xmlns:semantic="sap.f.semantic"-->
-<!--        xmlns:core="sap.ui.core"-->
-<!--        xmlns:mvc="sap.ui.core.mvc">-->
-
-<!--    <semantic:SemanticPage id="detailPage">-->
-<!--        <semantic:titleHeading>-->
-<!--            <Title-->
-<!--                    text="{ProjectName}"-->
-<!--                    level="H2"/>-->
-<!--        </semantic:titleHeading>-->
-<!--        <semantic:content>-->
-
-<!--            <core:Fragment id="SchedulingOptions"-->
-<!--                           fragmentName="sap.ui.demo.basicTemplate.view.fragments.TaskList"-->
-<!--                           type="XML"/>-->
-
-<!--            <core:Fragment id="SchedulingOptions"-->
-<!--                           fragmentName="sap.ui.demo.basicTemplate.view.fragments.MembersList"-->
-<!--                           type="XML"/>-->
-
-<!--        </semantic:content>-->
-
-<!--    </semantic:SemanticPage>-->
-
-<!--</mvc:View>-->
-
-
 <mvc:View
         xmlns="sap.uxap"
         xmlns:mvc="sap.ui.core.mvc"
@@ -39,17 +9,15 @@
     <ObjectPageLayout
             id="ObjectPageLayout"
             busyIndicatorDelay="0"
-            upperCaseAnchorBar="false">
+            upperCaseAnchorBar="false"
+            toggleHeaderOnTitleClick="true"
+            showFooter="{viewModel>/isEditMode}">
         <headerTitle>
             <ObjectPageHeader id="DetailsHeader" objectTitle="{ProjectName}">
                 <actions>
                     <ObjectPageHeaderActionButton id="_IDEGen_objectpageheaderactionbutton0" text="{i18n>edit}"
                                                   hideIcon="true" hideText="false" type="Emphasized"
                                                   press="onEditPress"/>
-                    <ObjectPageHeaderActionButton id="_IDEGen_objectpageheaderactionbutton2" text="{i18n>delete}"
-                                                  hideIcon="true" hideText="false"
-                                                  press="onDeletePress"
-                    />
                 </actions>
             </ObjectPageHeader>
         </headerTitle>
@@ -64,49 +32,52 @@
                 <m:ObjectAttribute id="_IDEGen_objectattribute1" text="{ProjectStatus}"/>
             </layout:VerticalLayout>
         </headerContent>
-
         <sections>
-<!--            <ObjectPageSection id="HeaderSection" title="{i18n>headerGeneralInformation}" titleUppercase="false"-->
-<!--                               visible="{viewModel>/isEditMode}">-->
-<!--                <subSections>-->
-<!--                    <ObjectPageSubSection id="_IDEGen_objectpagesubsection0">-->
-<!--                        <blocks>-->
-<!--                            <f:SimpleForm-->
-<!--                                    id="_IDEGen_simpleform0"-->
-<!--                                    editable="true"-->
-<!--                                    layout="ColumnLayout"-->
-<!--                                    columnsM="2"-->
-<!--                                    columnsL="3"-->
-<!--                                    columnsXL="4">-->
-<!--                                <f:content>-->
-<!--                                    <m:Label id="_IDEGen_label2" text="{i18n>headerTaskName}">-->
-<!--                                    </m:Label>-->
-<!--                                    <m:Input id="headerTaskName" value="{code}"-->
-<!--                                             required="{viewModel>/isEditMode}"-->
-<!--                                             visible="{= ${viewModel>/isCreateMode}}"-->
-<!--                                             fieldGroupIds="jobGroupId"-->
-<!--                                             editable="{viewModel>/isCreateMode}"-->
-<!--                                             maxLength="40"/>-->
+            <ObjectPageSection id="HeaderSection" title="{i18n>headerGeneralInformation}" titleUppercase="false"
+                               visible="{viewModel>/isEditMode}">
+                <subSections>
+                    <ObjectPageSubSection id="_IDEGen_objectpagesubsection0">
+                        <blocks>
+                            <f:SimpleForm
+                                    editable="true"
+                                    layout="ColumnLayout"
+                                    columnsM="2"
+                                    columnsL="3"
+                                    columnsXL="4">
+                                <f:content>
+                                    <m:Label text="{i18n>taskDescription}">
+                                    </m:Label>
+                                    <m:Input id="headerProjectDescription"
+                                             value="{ProjectDescription}"
+                                             required="{viewModel>/isEditMode}"
+                                             visible="{viewModel>/isEditMode}"
+                                             maxLength="40"/>
+                                    <m:Label text="{i18n>statusName}">
+                                    </m:Label>
+                                    <m:ComboBox placeholder="{i18n>selectAProjectStatus}"
+                                                selectionChange="onRequiredProjectCreationChange"
+                                                maxWidth="100%"
+                                                items="{path:'/ProjectStatusCollection'}"
+                                                selectedKey="{viewModel>/sNewProjectStatusKey}">
+                                        <m:Label text="{i18n>persons}" required="true"/>
+                                        <m:items>
+                                            <core:Item
+                                                    text="{Name}"
+                                                    key="{StatusID}"
+                                                    enabled="true"/>
+                                        </m:items>
+                                    </m:ComboBox>
+                                </f:content>
+                            </f:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
 
-<!--                                    <m:Label id="_IDEGen_label3" text="{i18n>headerTaskDescription}">-->
-<!--                                    </m:Label>-->
-<!--                                    <m:Input id="headerTaskDescription"-->
-<!--                                             value="{description}"-->
-<!--                                             fieldGroupIds="jobGroupId"-->
-<!--                                             editable="{viewModel>/isEditMode}"-->
-<!--                                             maxLength="100"/>-->
-<!--                                </f:content>-->
-<!--                            </f:SimpleForm>-->
-<!--                        </blocks>-->
-<!--                    </ObjectPageSubSection>-->
-<!--                </subSections>-->
-<!--            </ObjectPageSection>-->
-
-            <ObjectPageSection id="SchedulingOptionSection" title="{i18n>projectMembers}" titleUppercase="false">
+            <ObjectPageSection title="{i18n>projectMembers}" titleUppercase="false">
                 <subSections>
                     <ObjectPageSubSection id="_IDEGen_objectpagesubsection1">
-                        <core:Fragment id="SchedulingOptions"
-                                       fragmentName="sap.ui.demo.basicTemplate.view.fragments.MembersList"
+                        <core:Fragment fragmentName="sap.ui.demo.basicTemplate.view.fragments.MembersList"
                                        type="XML"/>
                     </ObjectPageSubSection>
                 </subSections>
@@ -116,17 +87,17 @@
                                titleUppercase="false">
                 <subSections>
                     <ObjectPageSubSection id="_IDEGen_objectpagesubsection2">
-                        <core:Fragment id="SchedulingParameters"
-                                       fragmentName="sap.ui.demo.basicTemplate.view.fragments.TaskList"
-                                       type="XML"/>
+                        <core:Fragment
+                                fragmentName="sap.ui.demo.basicTemplate.view.fragments.TaskList"
+                                type="XML"/>
                     </ObjectPageSubSection>
                 </subSections>
             </ObjectPageSection>
         </sections>
 
         <footer>
-            <m:OverflowToolbar id="_IDEGen_overflowtoolbar0">
-                <m:ToolbarSpacer id="_IDEGen_toolbarspacer0"/>
+            <m:OverflowToolbar>
+                <m:ToolbarSpacer/>
                 <m:Button
                         id="footerSaveBtn"
                         type="Emphasized"

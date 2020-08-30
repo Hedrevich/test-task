@@ -11,6 +11,7 @@
 
   },
   "devDependencies": {
+    "@sap/eslint-config-s4p": "^2.5.0",
     "@ui5/cli": "^2.2.6",
     "eslint": "^4.19.1",
     "gulp": "^4.0.2",

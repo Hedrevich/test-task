@@ -57,5 +57,12 @@ sap.ui.define([
         getModel: function (sName) {
             return this.getView().getModel(sName);
         },
+
+
+        //todo comments
+        getCurrentLocalData: function (oModel) {
+            return oModel.getData();
+        },
+
     });
 });

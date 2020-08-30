@@ -19,7 +19,7 @@
             <OverflowToolbar>
                 <Button id="navBackButton" icon="sap-icon://nav-back" press="onNavBack"/>
                 <Title text="{i18n>projects} ({viewModel>/itemsCount})" level="H2"  hAlign="Center"/>
-                <ToolbarSpacer id="_IDEGen_toolbarspacer0"/>
+                <ToolbarSpacer/>
                 <Button id="deleteProjectButton" text="{i18n>delete}" press="onDeleteProjectButton" enabled="{viewModel>/deleteButtonEnabled}"/>
                 <Button id="addProjectButton" text="{i18n>create}" press="onAddProjectButton"/>
             </OverflowToolbar>
@@ -51,7 +51,7 @@
                             text="{ProjectStatus}"
                             state="{
                                     path:'ProjectStatus',
-                                    formatter: '.formatter.statusColorToState'
+                                    formatter: '.formatter.statusProjectColorToState'
                                 }"
 
                     />

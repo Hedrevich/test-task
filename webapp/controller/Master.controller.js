@@ -52,6 +52,8 @@ sap.ui.define([
          * called when a user wants to create a new connected system
          */
         onAddProjectButton: function () {
+
+            //todo to base controller
             if (!this.oCreateDialog) {
                 this.oCreateDialog = sap.ui.xmlfragment(this.getView().getId(), "sap.ui.demo.basicTemplate.view.fragments.CreateProject", this);
                 this.oCreateDialog.setModel(this.oCreationModel, "ProjectForCreation");
@@ -83,13 +85,15 @@ sap.ui.define([
             this.oCreationModel.setProperty("/_isValidForCreation", bCanCreateProject);
         },
 
+
+        //todo base
         onSelectionChange: function (oEvent) {
             this.oViewModel.setProperty("/deleteButtonEnabled", oEvent.getParameter("selected"));
         },
 
 
 
-        onCreateButtonPressed: function () {
+        onCreateButtonPressed: function (oEvent) {
 
             // validate mandatory inputs
             var sProjectName = this.oCreationModel.getProperty("/name").trim();
@@ -110,7 +114,7 @@ sap.ui.define([
             this.getModel().setData(oLocalData);
 
             //close Dialog
-            this.onDialogCancel();
+            this.onDialogCancel(oEvent);
 
 
         },
@@ -125,6 +129,7 @@ sap.ui.define([
                 title: this.getResourceBundle().getText("confirmDeletion"),
                 onClose: function (oAction) {
                     if (oAction === MessageBox.Action.OK) {
+                        //todo check for view
                         var aSelectedItems = oProjectTable.getSelectedItems();
 
                         aSelectedItems.forEach((item) => {oProjectTable.removeItem(item)});
