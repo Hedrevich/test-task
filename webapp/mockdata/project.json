@@ -5,7 +5,7 @@
       "ProjectStatus": "In progress",
       "ProjectDescription": "Central Invoice Management",
       "ProjectName": "CIM Project",
-      "PersonsQuantity": 8,
+      "PersonsQuantity": 3,
       "Members": [
         {
           "MemberID": "1",
@@ -75,26 +75,69 @@
       "ProjectStatus": "Will start soon",
       "ProjectDescription": "SAP Cloud Platform  ",
       "ProjectName": "SCP Project",
-      "PersonsQuantity": 24
+      "PersonsQuantity": 0,
+      "Members": [
+        {
+          "MemberID": "1",
+          "Name": "Alex",
+          "WorkLoad": 0
+        },
+        {
+          "MemberID": "2",
+          "Name": "Yauhen",
+          "WorkLoad": 50
+        },
+        {
+          "MemberID": "4",
+          "Name": "Gena",
+          "WorkLoad": 50
+        }
+      ],
+      "Tasks": [
+        {
+          "TaskID": "5",
+          "Name": "Task 5",
+          "Description": "Description 5",
+          "Status": "Open",
+          "ProjectID": "2",
+          "Members": [
+          ]
+        }
+      ]
     },
     {
       "ProjectID": "4",
       "ProjectStatus": "Blocked",
       "ProjectDescription": "ABAP Project",
       "ProjectName": "SAP ERP ABAP",
-      "PersonsQuantity": 123
-    },
-    {
-      "ProjectID": "3",
-      "ProjectStatus": "Blocked",
-      "ProjectDescription": "Internal",
-      "ProjectName": "Internal SCP proje",
-      "PersonsQuantity": 123
+      "PersonsQuantity": 0,
+      "Members": [
+    ],
+      "Tasks": [
+        {
+          "TaskID": "5",
+          "Name": "Task 5",
+          "Description": "Description 5",
+          "Status": "Open",
+          "ProjectID": "2",
+          "Members": [
+          ]
+        }
+      ]
     }
   ],
 
 
-
+  "TaskCollection": [
+    {
+      "TaskID": "1",
+      "Name": "Test",
+      "Description": "Test Descr",
+      "Status": "In progress",
+      "ProjectID": "HT-1258",
+      "MemberID": "1"
+    }
+  ],
   "ProjectMembersCollection": [
     {
       "MemberID": "1",

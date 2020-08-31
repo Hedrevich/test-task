@@ -74,15 +74,18 @@ sap.ui.define([
             var aProjectMembers = oEvent.getSource().getBindingContext().getProperty("Members");
             var aAllMembers = this.getModel().getProperty("/ProjectMembersCollection");
 
+
+            var aFreePersons = aAllMembers;
             //to project can be assigned only free persons(not-assigned)
             //need check only if assigned persons exist
             if (aProjectMembers) {
-                var aFreePersons = aAllMembers.filter(function (oMember) {
+                 aFreePersons = aAllMembers.filter(function (oMember) {
                     return !aProjectMembers.find(function (assingedMember) {
                         return assingedMember.MemberID === oMember.MemberID;
                     });
                 });
             }
+
 
             this.oViewModel.setProperty("/sUnassignedPersons", aFreePersons);
 
@@ -123,9 +126,19 @@ sap.ui.define([
 
             var sSelectedIndex = oProjectMemberTable.indexOfItem(oProjectMemberTable.getSelectedItem());
             var oCurrentLocalData = this.getCurrentLocalData();
-            oCurrentLocalData.ProjectCollection[this.sProjectId].Members.splice(sSelectedIndex, 1);
+
+            //current members at project
+            var aCurrentMembers =  oCurrentLocalData.ProjectCollection[this.sProjectId].Members;
+
+            //sort by id
+            aCurrentMembers.sort((a,b) => (a.MemberID > b.MemberID) ? 1 : ((b.MemberID > a.MemberID) ? -1 : 0));
+            aCurrentMembers.splice(sSelectedIndex, 1);
+
+            oCurrentLocalData.ProjectCollection[this.sProjectId].Members = aCurrentMembers;
 
             this.setLocalData(oCurrentLocalData);
+
+            oProjectMemberTable.removeSelections();
 
 
         },
