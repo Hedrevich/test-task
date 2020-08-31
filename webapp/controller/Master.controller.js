@@ -171,9 +171,17 @@ sap.ui.define([
         onProjectItemPress: function (oEvent) {
             var sProjectID = oEvent.getParameter("listItem").getBindingContext().getPath().split("/").pop();
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            //now there is a problem with nav to new created items
+            //workaround
+            if(!(sProjectID>2)){
             oRouter.navTo("TargetDetailsPage", {
                 sProjectId: sProjectID
             });
+            } else {
+                MessageToast.show(this.getResourceBundle().getText("navigation"), {
+                    duration: 3000
+                });
+            }
         }
     });
 });
