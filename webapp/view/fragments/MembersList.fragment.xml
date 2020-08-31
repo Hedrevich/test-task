@@ -8,6 +8,7 @@
             id="idLineMembersList"
             width="auto"
             mode="SingleSelect"
+			updateFinished="onUpdateMembersTable"
             items="{
 						path: 'Members',
 						sorter: {
@@ -17,7 +18,7 @@
             selectionChange="onSelectionChange">
         <headerToolbar>
             <OverflowToolbar>
-                <Title text="{i18n>projectMembers}" level="H2"/>
+                <Title text="{i18n>projectMembers} ({viewModel>/memberListItemsCount})" level="H2"/>
                 <ToolbarSpacer/>
                 <Button text="{i18n>addMember}" press="onAddMemberButton"/>
                 <Button text="{i18n>deleteMember}" enabled="{viewModel>/onDeleteMemberButtonEnabled}" press="onDeleteMemberButton"/>

@@ -75,7 +75,7 @@
       "ProjectStatus": "Will start soon",
       "ProjectDescription": "SAP Cloud Platform  ",
       "ProjectName": "SCP Project",
-      "PersonsQuantity": 0,
+      "PersonsQuantity": 1,
       "Members": [
         {
           "MemberID": "1",
@@ -106,11 +106,11 @@
       ]
     },
     {
-      "ProjectID": "4",
+      "ProjectID": "3",
       "ProjectStatus": "Blocked",
       "ProjectDescription": "ABAP Project",
       "ProjectName": "SAP ERP ABAP",
-      "PersonsQuantity": 0,
+      "PersonsQuantity": 1,
       "Members": [
     ],
       "Tasks": [

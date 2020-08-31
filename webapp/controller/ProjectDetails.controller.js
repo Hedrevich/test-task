@@ -27,7 +27,9 @@ sap.ui.define([
                 sUnassignedPersons: [],
                 sNewMemberKey: "",
                 sNewProjectStatusKey: "",
-                onDeleteMemberButtonEnabled: false
+                onDeleteMemberButtonEnabled: false,
+                memberListItemsCount: 0,
+                taskListItemsCount: 0
             });
 
             this.setModel(this.oViewModel, "viewModel");
@@ -152,6 +154,16 @@ sap.ui.define([
         onCancelPress: function () {
             this._setEditMode(false);
         },
+
+        onUpdateMembersTable: function (oEvent) {
+            this.onUpdateTableCounter(oEvent, "memberListItemsCount");
+        },
+
+
+        onUpdateTasksTable: function (oEvent) {
+            this.onUpdateTableCounter(oEvent, "taskListItemsCount");
+        },
+
 
 
         //save on footer

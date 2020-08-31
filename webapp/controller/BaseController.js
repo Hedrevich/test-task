@@ -74,6 +74,15 @@ sap.ui.define([
          */
         setLocalData: function (oLocalData) {
             this.getModel().setData(oLocalData);
-        }
+        },
+
+        /**
+         * update Counter for table
+         * @param {objcet} oEvent
+         * @param {string} sProperty
+         */
+        onUpdateTableCounter: function (oEvent, sProperty) {
+            this.oViewModel.setProperty("/" + sProperty + "", oEvent.getParameter("total"));
+        },
     });
 });

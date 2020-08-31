@@ -5,6 +5,7 @@
 	<Table
 		id="lineItemsList"
 		width="auto"
+		updateFinished="onUpdateTasksTable"
 		items="{
 						path: 'Tasks',
 						sorter: {

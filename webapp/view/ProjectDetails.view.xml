@@ -86,7 +86,7 @@
 				</subSections>
 			</ObjectPageSection>
 
-			<ObjectPageSection id="SchedulingParameterSection" title="{i18n>projectTasks}"
+			<ObjectPageSection id="SchedulingParameterSection" title="{i18n>projectTasksList}   ({viewModel>/taskListItemsCount})"
 							   titleUppercase="false">
 				<subSections>
 					<ObjectPageSubSection>

@@ -42,8 +42,8 @@ sap.ui.define([
         },
 
 
-        onUpdateSchedulesFinished: function (oEvent) {
-            this.oViewModel.setProperty("/itemsCount", oEvent.getParameter("total"));
+        onUpdateProjectTable: function (oEvent) {
+            this.onUpdateTableCounter(oEvent, "itemsCount");
         },
 
 
@@ -98,10 +98,12 @@ sap.ui.define([
 
             // all looks good, trying to create new project
             var oNewObject = {
+
+                ProjectID: sProjectId.toString(),
                 ProjectName: sProjectName,
                 ProjectStatus: sProjectStatus,
-                ProjectDescription: sProjectStatusDescription,
-                ProjectID: sProjectId
+                ProjectDescription: sProjectStatusDescription
+
             };
 
             //set Local data

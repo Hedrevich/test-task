@@ -6,7 +6,7 @@
 		   mode="MultiSelect"
 		   inset="false"
 		   alternateRowColors="true"
-		   updateFinished="onUpdateSchedulesFinished"
+		   updateFinished="onUpdateProjectTable"
 		   selectionChange="onSelectionChange"
 		   itemPress="onProjectItemPress"
 		   items="{
