@@ -1,7 +1,7 @@
 {
   "name": "user-managment-system",
   "version": "0.1.0",
-  "description": "Best-practice starting point for building a freestyle app",
+  "description": "User Management System test app",
   "private": true,
   "scripts": {
     "start": "ui5 serve",
